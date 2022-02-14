@@ -17,7 +17,7 @@ enum CERTI {
 	EX
 };
 
-class member {
+struct member {
 	unsigned int employeeNum;
 	string name;
 	CL cl;
