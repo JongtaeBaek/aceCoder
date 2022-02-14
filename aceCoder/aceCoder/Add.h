@@ -2,11 +2,16 @@
 #include "member.h"
 #include <vector>
 
+vector<member> gmembers;
+
 using namespace std;
 class Add {
 public:
+	Add(vector<member>& members) : members_(members) {}
+	virtual ~Add() = default;
+
 	bool isValid  (const member &newmem) const {
-		for (const auto& mem : members) {
+		for (const auto& mem : members_) {
 			if (mem.employeeNum == newmem.employeeNum)
 				return false;
 		}
@@ -17,9 +22,9 @@ public:
 	}
 
 	int run(const member& newmem) {
-		members.push_back(newmem);
+		members_.push_back(newmem);
 		return 1;
 	}
 private:
-	vector<member> members;
+	vector<member> &members_;
 };
