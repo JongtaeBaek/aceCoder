@@ -1,10 +1,8 @@
 #pragma once
-#include "member.h"
 #include <vector>
+#include "member.h"
 
 vector<member> gmembers;
-
-using namespace std;
 class Add {
 public:
 	Add(vector<member>& members) : members_(members) {}

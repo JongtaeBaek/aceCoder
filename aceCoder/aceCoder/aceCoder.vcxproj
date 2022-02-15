@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="Add.h" />
     <ClInclude Include="member.h" />
+    <ClInclude Include="ParameterChecker.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
