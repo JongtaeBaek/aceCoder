@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "modifier.h"
 #include "member.h"
+#include "ParameterChecker.h"
 
 void sortMemberList(void)
 {
@@ -19,12 +20,18 @@ Modifier::~Modifier()
 {
 
 }
-
-int Modifier::Run(char opt1, char opt2, char opt3,
-	string findingIndex, string findingValue, string changingIndex, string changingValue)
+int Modifier::Run(vector<string> values)
 {
+	string opt1 = values[MODPARAINDEX::MODIDXFIRSTOPT];
+	string opt2 = values[MODPARAINDEX::MODIDXSECONDOPT];
+	string opt3 = values[MODPARAINDEX::MODIDXTHIRDOPT];
+	string findingIndex = values[MODPARAINDEX::MODIDXSEARCHOPTION];
+	string findingValue = values[MODPARAINDEX::MODIDXSEARCHVALUE];
+	string changingIndex = values[MODPARAINDEX::MODIDXCHANGEOPTION];
+	string changingValue = values[MODPARAINDEX::MODIDXCHANGEVALUE];
+
 	bool printOpt = false;
-	if (opt1 == 'p') printOpt = true;
+	if (opt1 == "p") printOpt = true;
 	bool firstName = false;
 	bool lastName = false;
 	bool middleNumber = false;
@@ -33,9 +40,9 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 	bool monthCheck = false;
 	bool dayCheck = false;
 
-	if (opt1 == 'p') printOpt = true;
+	if (opt1 == "p") printOpt = true;
 
-	switch (opt2)
+	switch (*opt2.c_str())
 	{
 	case 'f':
 		firstName = true;
@@ -58,7 +65,7 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 		break;
 	}
 
-	switch (opt3)
+	switch (*opt3.c_str())
 	{
 	default:
 		cout << "not supported option" << endl;
@@ -68,7 +75,6 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 	vector<vector<member>::iterator> findingMember;
 	vector<member>::iterator iter = memberList.begin();
 
-	//for (auto findMember : memberList)
 	for (; iter != memberList.end(); iter++ )
 	{
 		if (findingIndex == "employeeNum")
@@ -97,11 +103,7 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 		}
 		if (findingIndex == "cl")
 		{
-			CL expectCl = CL::CL1;
-			if (findingValue == "CL1") expectCl = CL::CL1;
-			if (findingValue == "CL2") expectCl = CL::CL2;
-			if (findingValue == "CL3") expectCl = CL::CL3;
-			if (findingValue == "CL4") expectCl = CL::CL4;
+			CL expectCl = getCL(findingValue);
 			if (iter->cl == expectCl)
 			{
 				findingMember.push_back(iter);
@@ -146,10 +148,7 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 		}
 		if (findingIndex == "certi")
 		{
-			CERTI expectCerti = CERTI::ADV;
-			if (findingValue == "ADV") expectCerti = CERTI::ADV;
-			if (findingValue == "PRO") expectCerti = CERTI::PRO;
-			if (findingValue == "EX") expectCerti = CERTI::EX;
+			CERTI expectCerti = getCELTI(findingValue);
 			if (iter->certi == expectCerti)
 			{
 				findingMember.push_back(iter);
@@ -169,12 +168,7 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 		}
 		if (changingIndex == "cl")
 		{
-			CL changeCl;
-			if (changingValue == "CL1") changeCl = CL::CL1;
-			if (changingValue == "CL2") changeCl = CL::CL2;
-			if (changingValue == "CL3") changeCl = CL::CL3;
-			if (changingValue == "CL4") changeCl = CL::CL4;
-			changeMember->cl = changeCl;
+			changeMember->cl = getCL(changingValue);
 		}
 		if (changingIndex == "phoneNum")
 		{
@@ -186,11 +180,7 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 		}
 		if (changingIndex == "certi")
 		{
-			CERTI changeCerti;
-			if (changingValue == "ADV") changeCerti = CERTI::ADV;
-			if (changingValue == "PRO") changeCerti = CERTI::PRO;
-			if (changingValue == "EX") changeCerti = CERTI::EX;
-			changeMember->certi = changeCerti;
+			changeMember->certi = getCELTI(changingValue);
 		}
 	}
 

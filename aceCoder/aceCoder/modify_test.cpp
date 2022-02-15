@@ -9,16 +9,18 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberThenReturnMinusValue) {
 
 	// when input empty list and run
 	Modifier* modifier = new Modifier(testList);
-	char option1 = ' ';
-	char option2 = ' ';
-	char option3 = ' ';
-	string finding1 = "name";
-	string finding2 = "A B";
-	string changing1 = "CL";
-	string changing2 = "CL3";
+	vector<string> cmdString;
+	cmdString.push_back("MOD");
+	cmdString.push_back(" ");
+	cmdString.push_back(" ");
+	cmdString.push_back(" ");
+	cmdString.push_back("name");
+	cmdString.push_back("A B");
+	cmdString.push_back("cl");
+	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(option1, option2, option3, finding1, finding2, changing1, changing2));
+	EXPECT_EQ(-1, modifier->Run(cmdString));
 }
 
 TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberWithName) {
@@ -35,15 +37,18 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberWithName) {
 
 	// when find name and change cl
 	Modifier* modifier = new Modifier(testList);
-	char option1 = ' ';
-	char option2 = ' ';
-	char option3 = ' ';
-	string finding1 = "name";
-	string finding2 = "A B";
-	string changing1 = "cl";
-	string changing2 = "CL3";
+	vector<string> cmdString;
+	cmdString.push_back("MOD");
+	cmdString.push_back(" ");
+	cmdString.push_back(" ");
+	cmdString.push_back(" ");
+	cmdString.push_back("name");
+	cmdString.push_back("A B");
+	cmdString.push_back("cl");
+	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(option1, option2, option3, finding1, finding2, changing1, changing2));
+	EXPECT_EQ(0, modifier->Run(cmdString));
 	EXPECT_EQ(CL::CL3 , testList.begin()->cl);
 }
+
