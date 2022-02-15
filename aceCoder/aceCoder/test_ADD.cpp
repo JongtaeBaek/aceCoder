@@ -3,7 +3,7 @@
 #include"Add.h"
 #include "ParameterChecker.h"
 
-TEST(PARAMETER_TESTSUITE, TEST_PARA) {
+TEST(ADD_TESTSUITE, TEST_PARAMETER) {
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	ParameterChecker* para = new ParameterChecker();		
 	EXPECT_TRUE(para->isValid(para->parse(str)));	
@@ -36,7 +36,7 @@ TEST(ADD_TESTSUITE, TEST_VALID) {
 }
 
 
-TEST(LOAD_TESTSUITE, TEST_INPUT) {
+TEST(ADD_TESTSUITE, TEST_INPUTFILE) {
 	vector<member> members;
 	ParameterChecker* para = new ParameterChecker();
 	vector<string>lines = para->loadTxt(".\\input\\inputAdd.txt");
