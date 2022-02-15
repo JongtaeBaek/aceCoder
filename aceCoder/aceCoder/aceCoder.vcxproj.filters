@@ -9,6 +9,8 @@
     <ClCompile Include="modify_test.cpp" />
     <ClCompile Include="delete.cpp" />
     <ClCompile Include="test_delete.cpp" />
+    <ClCompile Include="Sch.cpp" />
+    <ClCompile Include="test_SCH.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Add.h" />
@@ -17,6 +19,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="delete.h" />
+    <ClInclude Include="Sch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
