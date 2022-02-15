@@ -1,6 +1,8 @@
 #pragma once
 #include "member.h"
 #include <vector>
+#include <fstream>
+
 enum PARAINDEX {
 	IDXCMD =0, IDXFIRSTOPT, IDXSECONDOPT, IDXTHIRDOPT,
 	IDXEMPLOYEENUM, IDXNAME, IDXCL, IDXPHONENUM, IDXBIRTHDAY, IDXCERTI, PARAINDEXEND
@@ -13,6 +15,16 @@ const int BIRTHDAYSIZE = 8;
 
 class ParameterChecker {
 public:
+	vector<string> loadTxt(const string& filename) const {
+		vector<string> results;
+		std::ifstream input(filename);
+		for (std::string line; getline(input, line); )
+		{
+			results.emplace_back(line);
+		}
+
+		return results;
+	}
 	vector<string> parse(const string& inputstring, const string& delimeter = ",") const {
 		vector<string> results;
 		auto fPos = inputstring.find_first_not_of(delimeter, 0);
