@@ -4,7 +4,6 @@
 #include<string>
 using namespace std;
 
-
 enum CL {
 	CL1 = 1,
 	CL2,
