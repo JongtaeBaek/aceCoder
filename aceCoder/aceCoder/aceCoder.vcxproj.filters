@@ -5,12 +5,18 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="test_ADD.cpp" />
+    <ClCompile Include="modifier.cpp" />
+    <ClCompile Include="modify_test.cpp" />
+    <ClCompile Include="delete.cpp" />
+    <ClCompile Include="test_delete.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Add.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="ParameterChecker.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="modifier.h" />
+    <ClInclude Include="delete.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
