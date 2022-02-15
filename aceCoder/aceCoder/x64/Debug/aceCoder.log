@@ -1,2 +1,21 @@
-﻿  member.cpp
-  aceCoder.vcxproj -> C:\Users\Sanggu\Desktop\review\aceCoder\aceCoder\x64\Debug\aceCoder.exe
+﻿  pch.cpp
+  delete.cpp
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\delete.cpp(32,9): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'std::string'입니다.
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\delete.cpp(32,9): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'std::string'입니다.
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\delete.cpp(32,9): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'std::string'입니다.
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\delete.cpp(32,9): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 6의 형식이 'std::string'입니다.
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\delete.cpp(43,2): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\delete.cpp(76,28): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  member.cpp
+  modifier.cpp
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\modifier.cpp(87,20): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\modifier.cpp(91,20): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\modifier.cpp(116,24): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\modifier.cpp(120,24): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\aceCoder\modifier.cpp(66,2): warning C4065: switch문에 'default'가 있으나 'case' 레이블이 없습니다.
+  modify_test.cpp
+  test.cpp
+  test_ADD.cpp
+  test_delete.cpp
+  코드를 생성하고 있습니다...
+  aceCoder.vcxproj -> C:\Users\백종태\Desktop\새 폴더\aceCoder\aceCoder\x64\Debug\aceCoder.exe

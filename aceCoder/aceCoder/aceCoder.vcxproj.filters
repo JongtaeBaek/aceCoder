@@ -19,9 +19,6 @@
     <ClInclude Include="delete.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="input">
       <UniqueIdentifier>{5d1b3000-6c26-4416-a2cd-079606ab0198}</UniqueIdentifier>
     </Filter>
@@ -30,5 +27,8 @@
     <Text Include="input\inputAdd.txt">
       <Filter>input</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
