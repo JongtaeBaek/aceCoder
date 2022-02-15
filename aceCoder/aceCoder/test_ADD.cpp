@@ -20,8 +20,9 @@ TEST(PARAMETER_TESTSUITE, TEST_PARA) {
 }
 
 TEST(ADD_TESTSUITE, TEST_VALID) {
+	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";	
-	Add *add = new Add(gmembers);
+	Add *add = new Add(members);
 	member mem{ 18050301, string{ "KYUMOK KIM" }, CL::CL2, string{ "010-9777-6055" }, 19980906, CERTI::PRO };
 	EXPECT_TRUE(add->isValid(mem));
 	EXPECT_EQ(1, add->run(mem));
@@ -36,11 +37,11 @@ TEST(ADD_TESTSUITE, TEST_VALID) {
 
 
 TEST(LOAD_TESTSUITE, TEST_INPUT) {
+	vector<member> members;
 	ParameterChecker* para = new ParameterChecker();
 	vector<string>lines = para->loadTxt(".\\input\\inputAdd.txt");
 	ASSERT_NE(0, lines.size());
-
-	Add* add = new Add(gmembers);
+	Add* add = new Add(members);
 	for (const auto& line : lines) {
 		const vector<string> values = para->parse(line);
 		ASSERT_TRUE(para->isValid(values));
