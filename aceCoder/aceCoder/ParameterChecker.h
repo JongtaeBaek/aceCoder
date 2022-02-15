@@ -14,7 +14,39 @@ const int EMPLOYEENUMSIZE = 8;
 const int BIRTHDAYSIZE = 8;
 
 class ParameterChecker {
+private:
+	CL getCL(string& str) const {
+		if (str == "CL1")
+			return CL::CL1;
+		else if ( str == "CL2")
+			return CL::CL2;
+		else if (str == "CL3")
+			return CL::CL3;
+
+		return CL::CL4;
+	}
+
+	CERTI getCELTI(string &str) const {
+		if (str == "ADV")
+			return CERTI::ADV;
+		else if (str == "PRO")
+			return CERTI::PRO;
+
+		return CERTI::EX;
+	}
+
 public:
+	member convert(vector<string>& values) const {
+		member result{ 0 };
+		result.employeeNum = stoi(values[IDXEMPLOYEENUM]);
+		result.name = values[IDXNAME];
+		result.cl = getCL(values[IDXCL]);
+		result.phoneNum = values[IDXPHONENUM];
+		result.birthday = stoi(values[IDXBIRTHDAY]);
+		result.certi = getCELTI(values[IDXCERTI]);
+		return result;
+	}
+
 	vector<string> loadTxt(const string& filename) const {
 		vector<string> results;
 		std::ifstream input(filename);
@@ -25,6 +57,7 @@ public:
 
 		return results;
 	}
+
 	vector<string> parse(const string& inputstring, const string& delimeter = ",") const {
 		vector<string> results;
 		auto fPos = inputstring.find_first_not_of(delimeter, 0);

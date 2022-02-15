@@ -43,8 +43,11 @@ TEST(LOAD_TESTSUITE, TEST_INPUT) {
 	ASSERT_NE(0, lines.size());
 	Add* add = new Add(members);
 	for (const auto& line : lines) {
-		const vector<string> values = para->parse(line);
+		vector<string> values = para->parse(line);
 		ASSERT_TRUE(para->isValid(values));
+		const member mem = para->convert(values);
+		EXPECT_TRUE(add->isValid(mem));
+		EXPECT_EQ(1, add->run(mem));
 	}
 
 	delete add;
