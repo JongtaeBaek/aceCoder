@@ -2,7 +2,6 @@
 #include <vector>
 #include "member.h"
 
-vector<member> gmembers;
 class Add {
 public:
 	Add(vector<member>& members) : members_(members) {}
