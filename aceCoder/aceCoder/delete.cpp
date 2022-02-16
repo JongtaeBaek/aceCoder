@@ -4,9 +4,6 @@
 #include<stdio.h>
 #include<iostream>
 
-//static vector<member> gmembers;
-
-//vector<member> m;
 static vector<member> big_five;
 char flag[MAXDATA] = { 0 , };
 
@@ -29,7 +26,7 @@ string certi_level[3] = {
 
 static void print_info(struct member m)
 {
-	printf("DEL,%8d,%s,%s,%s,%d,%s\n", m.employeeNum, m.name, cl_position[m.cl - 1], m.phoneNum, m.birthday, certi_level[m.certi]);
+	cout << "DEL," << m.employeeNum << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << endl;
 }
 
 static void initialize_flag(void)
@@ -70,7 +67,7 @@ static int compare_employeeNum(unsigned int a, unsigned int b)
 	return 0;
 }
 
-static void save_print_member(struct member a)
+static void save_big_five_member(struct member a)
 {
 	int i = 0;
 	int size = big_five.size();
@@ -96,16 +93,17 @@ static void save_print_member(struct member a)
 	return;
 }
 
-static void print_save(void)
+static void print_big_five(void)
 {
 	for (int i = 0; i < big_five.size(); i++) {
 		print_info(big_five[i]);
 	}
+	cout << endl;
 
 	return;
 }
 
-static int Delete_employeeNum(vector<member>& gmembers, string str)
+static int Delete_employeeNum(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
 	int cond = stoi(str);
@@ -115,7 +113,7 @@ static int Delete_employeeNum(vector<member>& gmembers, string str)
 		if (cond == gmembers[i].employeeNum) {
 			flag[i] = 1;
 			sum++;
-			save_print_member(gmembers[i]);
+			save_big_five_member(gmembers[i]);
 			//printf("hit\n");
 		}
 			
@@ -127,16 +125,34 @@ static int Delete_employeeNum(vector<member>& gmembers, string str)
 	return sum;
 }
 
-static int Delete_name(vector<member>& gmembers, string str)
+static int Delete_name(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
 
 	for (int i = 0; i < gmembers.size(); i++)
 	{
-		if (!str.compare(gmembers[i].name)) {
+		int position_of_blank = gmembers[i].name.find(" ");
+		string database_name;
+
+
+		if (option2 == FIRST_NAME) {
+			database_name = gmembers[i].name.substr(0, position_of_blank);
+			//printf("[SGSGSGSGSTEST]\n%s\n", database_name);
+		}
+
+		else if (option2 == LAST_NAME) {
+			database_name = gmembers[i].name.substr(position_of_blank+1, gmembers[i].name.size()- position_of_blank);
+			//printf("[SGSGSGSGSTESTasd]\n%s %s\n", database_name, str);
+		}
+
+		else if (option2 == FULL_NAME) {
+			database_name = gmembers[i].name;
+		}
+
+		if (!str.compare(database_name)) {
 			flag[i] = 1;
 			sum++;
-			save_print_member(gmembers[i]);
+			save_big_five_member(gmembers[i]);
 			//printf("hit\n");
 		}
 			
@@ -148,7 +164,7 @@ static int Delete_name(vector<member>& gmembers, string str)
 	return sum;
 }
 
-static int Delete_cl(vector<member>& gmembers, string str)
+static int Delete_cl(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
 	int cond;
@@ -165,7 +181,7 @@ static int Delete_cl(vector<member>& gmembers, string str)
 		if (gmembers[i].cl == cond) {
 			flag[i] = 1;
 			sum++;
-			save_print_member(gmembers[i]);
+			save_big_five_member(gmembers[i]);
 			//printf("hit\n");
 		}
 			
@@ -184,19 +200,34 @@ static int Delete_cl(vector<member>& gmembers, string str)
 	return sum;
 }
 
-static int Delete_phoneNum(vector<member>& gmembers, string str)
+static int Delete_phoneNum(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
 
 	for (int i = 0; i < gmembers.size(); i++)
 	{
-		if (!str.compare(gmembers[i].phoneNum)) {
+		int position_of_blank = gmembers[i].phoneNum.find(" ");
+		string database_name;
+
+
+		if (option2 == MIDDLE_PHONENUM) {
+			database_name = gmembers[i].phoneNum.substr(4, 4);
+		}
+
+		else if (option2 == LAST_PHONENUM) {
+			database_name = gmembers[i].phoneNum.substr(9, 4);
+		}
+
+		else if (option2 == FULL_PHONENUM) {
+			database_name = gmembers[i].phoneNum;
+		}
+
+		if (!str.compare(database_name)) {
 			flag[i] = 1;
 			sum++;
-			save_print_member(gmembers[i]);
-			//printf("hit\n");
+			save_big_five_member(gmembers[i]);
 		}
-			
+
 	}
 
 	erase_start(gmembers, flag);
@@ -205,17 +236,35 @@ static int Delete_phoneNum(vector<member>& gmembers, string str)
 	return sum;
 }
 
-static int Delete_birthday(vector<member>& gmembers, string str)
+static int Delete_birthday(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
 	int cond = stoi(str);
 
 	for (int i = 0; i < gmembers.size(); i++)
 	{
-		if (gmembers[i].birthday == cond) {
+		unsigned int database_birthday;
+
+		if (option2 == YEAR_BIRTHDAY) {
+			database_birthday = gmembers[i].birthday/10000;
+		}
+
+		else if (option2 == MONTH_BIRTHDAY) {
+			database_birthday = (gmembers[i].birthday % 10000) / 100;
+		}
+
+		else if (option2 == DAY_BIRTHDAY) {
+			database_birthday = gmembers[i].birthday % 100;
+		}
+
+		else if (option2 == FULL_BIRTHDAY) {
+			database_birthday = gmembers[i].birthday;
+		}
+
+		if (database_birthday == cond) {
 			flag[i] = 1;
 			sum++;
-			save_print_member(gmembers[i]);
+			save_big_five_member(gmembers[i]);
 			//printf("hit\n");
 		}
 			
@@ -227,7 +276,7 @@ static int Delete_birthday(vector<member>& gmembers, string str)
 	return sum;
 }
 
-static int Delete_certi(vector<member>& gmembers, string str)
+static int Delete_certi(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
 	int level;
@@ -244,7 +293,7 @@ static int Delete_certi(vector<member>& gmembers, string str)
 		if (gmembers[i].certi == level) {
 			flag[i] = 1;
 			sum++;
-			save_print_member(gmembers[i]);
+			save_big_five_member(gmembers[i]);
 			//printf("hit\n");
 		}
 			
@@ -256,7 +305,7 @@ static int Delete_certi(vector<member>& gmembers, string str)
 	return sum;
 }
 
-static int (*Delete_Condition[NUM_OF_CONDITION])(vector<member>& gmembers, string str)
+static int (*Delete_Condition[NUM_OF_CONDITION])(vector<member>& gmembers, string str, int option1, int option2)
 {
 	Delete_employeeNum,
 	Delete_name,
@@ -273,14 +322,103 @@ static void initialize_condition(void)
 	initialize_flag();
 }
 
-int Delete(vector<member> &members, string condition, string str, int option1, int option2)
+static void print_output(int option1, int sum)
+{
+	if (big_five.empty()) {
+		cout << "DEL,NONE" << endl;
+		return;
+	}
+		
+	if (option1 == PRINT_ON) {
+		print_big_five();
+		return;
+	}
+
+	cout << "DEL," << sum << endl;
+}
+
+static int check_option(string condition, string opt1, string opt2, int& option1, int& option2)
+{
+	if (!opt1.compare(" ")) {
+		option1 = PRINT_OFF;
+	}
+
+	else if (!opt1.compare("-p")) {
+		option1 = PRINT_ON;
+	}
+
+	else
+		return -1;
+
+	if (!condition.compare("name")) {
+		if (!opt2.compare(" ")) {
+			option2 = FULL_NAME;
+			return 0;
+		}
+
+		else if (!opt2.compare("-f")) {
+			option2 = FIRST_NAME;
+			return 0;
+		}
+
+		else if (!opt2.compare("-l")) {
+			option2 = LAST_NAME;
+			return 0;
+		}
+		return -1;
+	}
+
+	else if (!condition.compare("phoneNum")) {
+		if (!opt2.compare(" ")) {
+			option2 = FULL_PHONENUM;
+			return 0;
+		}
+
+		else if (!opt2.compare("-m")) {
+			option2 = MIDDLE_PHONENUM;
+			return 0;
+		}
+
+		else if (!opt2.compare("-l")) {
+			option2 = LAST_PHONENUM;
+			return 0;
+		}
+		return -1;
+	}
+	
+	else if (!condition.compare("birthday")) {
+		if (!opt2.compare(" ")) {
+			option2 = FULL_BIRTHDAY;
+			return 0;
+		}
+
+		else if (!opt2.compare("-y")) {
+			option2 = YEAR_BIRTHDAY;
+			return 0;
+		}
+
+		else if (!opt2.compare("-m")) {
+			option2 = MONTH_BIRTHDAY;
+			return 0;
+		}
+
+		else if (!opt2.compare("-d")) {
+			option2 = DAY_BIRTHDAY;
+			return 0;
+		}
+		return -1;
+	}
+
+	return 0;
+}
+
+int Delete(vector<member> &members, string condition, string str, string opt1, string opt2)
 {
 	int i = 0;
-
-	//gmembers = members;
+	int sum = 0;
+	int option1, option2;
 
 	initialize_condition();
-
 	for (i = 0; i < NUM_OF_CONDITION; i++) {
 		if (!condition.compare(member_condition[i]))
 			break;
@@ -290,8 +428,13 @@ int Delete(vector<member> &members, string condition, string str, int option1, i
 		return -1;
 	}
 
-	//members.swap(gmembers);
+	if (check_option(condition, opt1, opt2, option1, option2) == -1)
+		return -1;
 
-	return Delete_Condition[i](members, str);
+	sum = Delete_Condition[i](members, str, option1, option2);
+	print_output(option1, sum);
+
+
+	return sum;
 
 }
