@@ -13,6 +13,7 @@
     <ClCompile Include="test_SCH.cpp" />
     <ClCompile Include="AddParmeterChecker.cpp" />
     <ClCompile Include="Add.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Add.h" />
