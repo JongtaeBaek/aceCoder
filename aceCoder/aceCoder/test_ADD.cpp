@@ -99,13 +99,13 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE3) {
 	EXPECT_EQ(20, members.size());
 
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
-	EXPECT_NO_THROW(add->run(str));
+	EXPECT_EQ(add->run(str), string{""});
 	str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906";
-	EXPECT_ANY_THROW(add->run(str));
+	EXPECT_NE(add->run(str), string{ "" });
 	str = "XXX, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
-	EXPECT_ANY_THROW(add->run(str));
+	EXPECT_NE(add->run(str), string{ "" });
 	str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
-	EXPECT_ANY_THROW(add->run(str));
+	EXPECT_NE(add->run(str), string{ "" });
 
 	delete add;
 	delete para;
