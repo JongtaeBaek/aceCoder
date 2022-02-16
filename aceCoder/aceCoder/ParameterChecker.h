@@ -14,27 +14,6 @@ const int EMPLOYEENUMSIZE = 8;
 const int BIRTHDAYSIZE = 8;
 
 class ParameterChecker {
-private:
-	CL getCL(string& str) const {
-		if (str == "CL1")
-			return CL::CL1;
-		else if ( str == "CL2")
-			return CL::CL2;
-		else if (str == "CL3")
-			return CL::CL3;
-
-		return CL::CL4;
-	}
-
-	CERTI getCELTI(string &str) const {
-		if (str == "ADV")
-			return CERTI::ADV;
-		else if (str == "PRO")
-			return CERTI::PRO;
-
-		return CERTI::EX;
-	}
-
 public:
 	member convert(vector<string>& values) const {
 		member result{ 0 };
@@ -69,88 +48,29 @@ public:
 		}
 		
 		return results;
-	}
-	
-	bool isCMDValid(const string& str) {
-		if (str != "ADD" && str != "DEL" && str != "SCH" && str != "MOD")
-			return false;
-		return true;
+	}	
+
+	virtual bool isValid(const vector<string>& values)  {		
+		return false;
 	}
 
-	bool isEmpoleeNumValid(const string& str) {
-		if (str.size() > EMPLOYEENUMSIZE)
-			return false;
-		return true;
+	CL getCL(string& str) const {
+		if (str == "CL1")
+			return CL::CL1;
+		else if (str == "CL2")
+			return CL::CL2;
+		else if (str == "CL3")
+			return CL::CL3;
+
+		return CL::CL4;
 	}
 
-	bool isNameValid(const string& str) {
-		if (str.size() > MAXNAMESIZE)
-			return false;
-		return true;
+	CERTI getCELTI(string& str) const {
+		if (str == "ADV")
+			return CERTI::ADV;
+		else if (str == "PRO")
+			return CERTI::PRO;
+
+		return CERTI::EX;
 	}
-
-	bool isCLValid(const string& str) {
-		if (str != "CL1" && str != "CL2" && str != "CL3" && str != "CL4")
-			return false;
-		return true;
-	}
-
-	bool isPhoneNumValid(const string& str) {
-		if (str.size() > PHONNUBERSIZE || str.substr(0, 3) != "010"|| str.substr(3, 1) != "-" || str.substr(3, 1) != "-" || str.substr(8, 1) != "-")
-			return false;
-			
-		return true;
-	}
-
-	bool isBirthdayValid(const string& str) {
-		if (str.size() > BIRTHDAYSIZE)
-			return false;
-		return true;
-	}
-
-	bool isCELTIValid(const string& str) {
-		if (str != "ADV" && str != "PRO" && str != "EXPERT")
-			return false;
-		return true;
-	}
-
-	bool isValid(const vector<string>& values)  {
-		if (values.size() != PARAINDEX::PARAINDEXEND)
-			return false;
-
-		for (int i = 0; i < values.size(); i++) {
-			if (i == PARAINDEX::IDXCMD) {
-				if (isCMDValid(values[i]) == false)
-					return false;					
-			}
-			else if (i == PARAINDEX::IDXEMPLOYEENUM) {
-				if (isEmpoleeNumValid(values[i]) == false)
-					return false;
-			}
-			else if (i == PARAINDEX::IDXNAME) {
-				if (isNameValid(values[i]) == false)
-					return false;
-			}
-			else if (i == PARAINDEX::IDXCL) {
-				if (isCLValid(values[i]) == false)
-					return false;
-			}
-			else if (i == PARAINDEX::IDXPHONENUM) {
-				if (isPhoneNumValid(values[i]) == false)
-					return false;
-			}
-			else if (i == PARAINDEX::IDXBIRTHDAY) {
-				if (isBirthdayValid(values[i]) == false)
-					return false;
-			}
-			else if (i == PARAINDEX::IDXCERTI) {
-				if (isCELTIValid(values[i]) == false)
-					return false;
-			}
-		}
-
-		return true;
-	}
-private:
-
 };
