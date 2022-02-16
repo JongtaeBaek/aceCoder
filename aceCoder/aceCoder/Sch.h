@@ -3,8 +3,7 @@
 #include <string>
 #include <sstream>
 #include "member.h"
-#include "ParameterChecker.h"
-
+#include "SchParameterChecker.h"
 
 class Sch {
 public:
@@ -12,32 +11,32 @@ public:
 	virtual ~Sch() = default;
 
 	string run(string cmd) {
-		ParameterChecker* para = new ParameterChecker();
-		if (para->isValid(para->parse(cmd))) {
-			return "";
-		}
+		string ret = "";
 
+		ParameterChecker* schpara = new SchParameterChecker();
+		vector<string> values = schpara->parse(cmd);
+		if (!schpara->isValid(values))
+			return "";
+		
 		vector <member> members = search(cmd, members_);
 		
 		Sort_member(members);
-
-		string ret = "";
+		
 		if (members.empty()) {
-			cout << (ret = "SCH,NONE") << endl;
+			ret = "SCH,NONE\n";
 			return ret;
 		}
 
-		if (para->parse(cmd)[1] == "-p") {
+		if (schpara->parse(cmd)[1] == "-p") {
 			for (auto& member : members) {
 				if (members.size() > 5 && compare_fifth_member(member, members[5])) {
 					break;
 				}
-				cout << "SCH," + convert_ID(member.employeeNum) + "," + member.name + "," + convert_CL(member.cl) + "," + member.phoneNum + "," + to_string(member.birthday) + "," + convert_CERTI(member.certi) << endl;
-				ret += "SCH," + convert_ID(member.employeeNum) + "," + member.name + "," + convert_CL(member.cl) + "," + member.phoneNum + "," + to_string(member.birthday) + "," + convert_CERTI(member.certi);
+				ret += "SCH," + convert_ID(member.employeeNum) + "," + member.name + "," + convert_CL(member.cl) + "," + member.phoneNum + "," + to_string(member.birthday) + "," + convert_CERTI(member.certi) + "\n";
 			}
 		}
 		else {
-			cout << (ret += "SCH," + to_string(members.size())) << endl;
+			ret = "SCH," + to_string(members.size()) + "\n";
 		}
 		
 		return ret;

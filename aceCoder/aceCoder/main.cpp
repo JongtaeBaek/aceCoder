@@ -3,6 +3,7 @@
 #include "Add.h"
 #include "delete.h"
 #include "modifier.h"
+#include "Sch.h"
 
 int main()
 {	
@@ -16,6 +17,7 @@ int main()
 	add->setParameterChecker(para);
 	Del* del = new Del(members);
 	Modifier* modifier = new Modifier(members);
+	Sch* sch = new Sch(members);
 	string outputresult;
 
 	for (const auto& line : lines) {
@@ -31,6 +33,10 @@ int main()
 		else if (values[IDXCMD] == "MOD")
 		{
 			outputresult += modifier->run(line);
+		}
+		else if (values[IDXCMD] == "SCH")
+		{
+			outputresult += sch->run(line);
 		}
 	}
 
