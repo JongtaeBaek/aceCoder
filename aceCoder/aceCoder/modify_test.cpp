@@ -7,7 +7,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithEmptyListThenReturnMinusValue) 
 	// given empty list
 	vector<member> testList;
 
-	// when input empty list and run
+	// when input empty list and Modify
 	Modifier* modifier = new Modifier(testList);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
@@ -19,8 +19,9 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithEmptyListThenReturnMinusValue) 
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	// then modifier Modify return minus value
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 }
 
 TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongNameThenReturnMinusValue) {
@@ -48,7 +49,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongNameThenReturnMinusValue) 
 	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 
@@ -77,7 +79,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongEmployeeNumThenReturnMinus
 	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 
@@ -106,7 +109,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongCLThenReturnMinusValue) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 
@@ -135,7 +139,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongPhoneNumThenReturnMinusVal
 	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 
@@ -164,7 +169,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongBirthDayThenReturnMinusVal
 	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 
@@ -193,7 +199,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongCertiThenReturnMinusValue)
 	cmdString.push_back("CL3");
 
 	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithName) {
@@ -221,7 +228,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithName) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3 , testList.begin()->cl);
 }
 
@@ -250,7 +258,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithEmployeeNum) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -279,7 +288,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithCL) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -308,7 +318,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithPhoneNum) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -337,7 +348,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBItrhDay) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -366,7 +378,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithCerti) {
 	cmdString.push_back("CL3");
 
 	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -394,8 +407,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithFirstNameOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -423,8 +437,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithLastNameOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -452,8 +467,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithMiddlePhoneNumOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -481,8 +497,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithLastPhoneNumOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -510,8 +527,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayYearOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -539,8 +557,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayMonthOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -568,8 +587,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayDayOption) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,1\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -586,7 +606,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToPrintDoNotFindMemberWithWrongCertiThenReturnM
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	// when input empty list and run
+	// when input empty list and Modify
 	Modifier* modifier = new Modifier(testList);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
@@ -598,8 +618,9 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToPrintDoNotFindMemberWithWrongCertiThenReturnM
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return minus value
-	EXPECT_EQ(-1, modifier->Run(cmdString));
+	// then modifier Modify return minus value
+	string resultStr = "MOD,NONE\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_NE(CL::CL3, testList.begin()->cl);
 }
 TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberInfoAndChangeClWithName) {
@@ -626,8 +647,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberInfoAndChangeClWithName) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,12345678,A B,CL1,010-1234-5678,19990215,ADV\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	EXPECT_EQ(CL::CL3, testList.begin()->cl);
 }
 
@@ -687,8 +709,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,12345670,A A,CL1,010-1234-5678,19990215,ADV\nMOD,12345671,A B,CL1,010-1234-5678,19990215,ADV\nMOD,12345672,A C,CL1,010-1234-5678,19990215,ADV\nMOD,12345673,A D,CL1,010-1234-5678,19990215,ADV\nMOD,12345674,A E,CL1,010-1234-5678,19990215,ADV\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	for (auto member : testList)
 	{
 		EXPECT_EQ(CL::CL3, member.cl);
@@ -760,8 +783,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,12345670,A A,CL1,010-1234-5678,19990215,ADV\nMOD,12345671,A B,CL1,010-1234-5678,19990215,ADV\nMOD,12345672,A C,CL1,010-1234-5678,19990215,ADV\nMOD,12345673,A D,CL1,010-1234-5678,19990215,ADV\nMOD,12345674,A E,CL1,010-1234-5678,19990215,ADV\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	for (auto member : testList)
 	{
 		EXPECT_EQ(CL::CL3, member.cl);
@@ -833,8 +857,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveAndChang
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,74345671,A B,CL1,010-1234-5678,19990215,ADV\nMOD,80345670,A A,CL1,010-1234-5678,19990215,ADV\nMOD,90345675,A F,CL1,010-1234-5678,19990215,ADV\nMOD,12345672,A C,CL1,010-1234-5678,19990215,ADV\nMOD,12345673,A D,CL1,010-1234-5678,19990215,ADV\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	for (auto member : testList)
 	{
 		EXPECT_EQ(CL::CL3, member.cl);
@@ -905,8 +930,9 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberCountOverFiveAndChangeClWithNam
 	cmdString.push_back("cl");
 	cmdString.push_back("CL3");
 
-	// then modifier run return success(0) and cl changed
-	EXPECT_EQ(0, modifier->Run(cmdString));
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,5\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
 	for (auto member : testList)
 	{
 		EXPECT_EQ(CL::CL3, member.cl);

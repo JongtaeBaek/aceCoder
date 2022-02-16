@@ -67,16 +67,19 @@ void SaveSortMemberList(vector<member>& sortedList, member selectedMember)
 
 }
 
-void PrintList(vector<member>& findingMembers)
+string PrintList(vector<member>& findingMembers)
 {
-	int printCount = 0;
+	string result;
 	for (auto member : findingMembers)
 	{
-		printCount++;
-		cout << "MOD," << member.employeeNum << "," << member.name << "," << ConvertCl(member.cl)
-			<< "," << member.phoneNum << "," << member.birthday << "," << ConvertCerti(member.certi) << endl;
-		if (printCount == 5) break;
+		result += "MOD," + to_string(member.employeeNum);
+		result += "," + member.name;
+		result += "," + ConvertCl(member.cl);
+		result += "," + member.phoneNum;
+		result += "," + to_string(member.birthday);
+		result += "," + ConvertCerti(member.certi) + "\n";
 	}
+	return result;
 }
 
 Modifier::Modifier(vector<member>& inputList) : memberList(inputList)
@@ -87,8 +90,14 @@ Modifier::~Modifier()
 {
 
 }
-int Modifier::Run(vector<string> values)
+string Modifier::run(const string& inputstring)
 {
+	return Modify(parse(inputstring));
+}
+
+string Modifier::Modify(vector<string> values)
+{
+	string result = "";
 	string opt1 = values[MODPARAINDEX::MODIDXFIRSTOPT];
 	string opt2 = values[MODPARAINDEX::MODIDXSECONDOPT];
 	string opt3 = values[MODPARAINDEX::MODIDXTHIRDOPT];
@@ -247,23 +256,22 @@ int Modifier::Run(vector<string> values)
 
 	if (findingMember.empty() == true)
 	{
-		cout << "MOD,NONE" << endl;
-		return -1;
+		return "MOD,NONE\n";
 	}
 
 	if (printOpt == true)
 	{
-		PrintList(sortedMember);
+		result += PrintList(sortedMember);
 	}
 	else
 	{
 		if (findingMember.size() > 5)
 		{
-			cout << "MOD,5" << endl;
+			result += "MOD,5\n";
 		}
 		else
 		{
-			cout << "MOD," << findingMember.size() << endl;
+			result += "MOD," + to_string(findingMember.size()) + "\n";
 		}
 	}
 
@@ -303,5 +311,5 @@ int Modifier::Run(vector<string> values)
 		}
 	}
 
-	return 0;
+	return result;
 }
