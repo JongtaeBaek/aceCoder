@@ -8,7 +8,7 @@ public:
 	virtual ~Add() = default;
 
 	bool isValid(const member& newmem) const;
-	int run(const member& newmem);
+	string run(const member& newmem);
 private:
 	vector<member> &members_;
 };

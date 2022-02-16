@@ -3,7 +3,6 @@
 #include "Add.h"
 #include "ADDParmeterChecker.h"
 
-
 int main()
 {	
 	vector<member> members;
