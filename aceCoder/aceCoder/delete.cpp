@@ -7,6 +7,17 @@
 static vector<member> big_five;
 char flag[MAXDATA] = { 0 , };
 
+enum condition {
+	EMPLOYEENUM = 0,
+	NAME,
+	CL,
+	PHONENUM,
+	BIRTHDAY,
+	CERTI,
+	NUM_OF_CONDITION
+};
+
+
 string member_condition[NUM_OF_CONDITION] = {
 	"employeeNum",
 	"name",
