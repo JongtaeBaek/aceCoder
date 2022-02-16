@@ -15,7 +15,7 @@ bool Add::isValid(const member& newmem) const {
 	return true;
 }
 
-int Add::run(const member& newmem) {
+string Add::run(const member& newmem) {
 	members_.push_back(newmem);
-	return 1;
+	return string{};
 }

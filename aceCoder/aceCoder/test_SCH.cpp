@@ -47,7 +47,7 @@ TEST(SCH_TEST, TEST1) {
 		ASSERT_TRUE(para->isValid(values));
 		const member mem = para->convert(values);
 		EXPECT_TRUE(add->isValid(mem));
-		EXPECT_EQ(1, add->run(mem));
+		add->run(mem);
 	}
 	
 	Sch* sch = new Sch(members);

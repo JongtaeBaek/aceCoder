@@ -25,7 +25,7 @@ TEST(ADD_TESTSUITE, TEST_VALID) {
 	Add *add = new Add(members);
 	member mem{ 18050301, string{ "KYUMOK KIM" }, CL::CL2, string{ "010-9777-6055" }, 19980906, CERTI::PRO };
 	EXPECT_TRUE(add->isValid(mem));
-	EXPECT_EQ(1, add->run(mem));
+	add->run(mem);
 
 	EXPECT_FALSE(add->isValid(member{ 18050301, string{ "KYUMOK LEE" }, CL::CL3, string{ "010-9777-6051" }, 19980905, CERTI::ADV }));
 	EXPECT_FALSE(add->isValid(member{ 18050302, string{ "" }, CL::CL3, string{ "010-9777-6051" }, 19980905, CERTI::ADV }));
@@ -46,7 +46,7 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE) {
 		ASSERT_TRUE(para->isValid(values));
 		const member mem = para->convert(values);
 		EXPECT_TRUE(add->isValid(mem));
-		EXPECT_EQ(1, add->run(mem));
+		add->run(mem);
 	}
 
 	delete add;

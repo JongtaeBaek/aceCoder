@@ -33,7 +33,7 @@ TEST(DEL_TESTSUITE, TEST_EMPLOYEENUM) {
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(1, Delete(members, "employeeNum", "14130827", " ", " "));
@@ -52,7 +52,7 @@ TEST(DEL_TESTSUITE, TEST_NAME) {
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(1, Delete(members, "name", "KBU MHU", " ", " "));
@@ -71,7 +71,7 @@ TEST(DEL_TESTSUITE, TEST_NAME_FL) {
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(1, Delete(members, "name", "KBU MHU", " ", " "));
@@ -90,7 +90,7 @@ TEST(DEL_TESTSUITE, TEST_CL) {
 	
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(5, Delete(members, "cl", "CL1", "-p", " "));
@@ -110,7 +110,7 @@ TEST(DEL_TESTSUITE, TEST_PHONENUM) {
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(1, Delete(members, "phoneNum", "010-8900-1478", " ", " "));
@@ -131,7 +131,7 @@ TEST(DEL_TESTSUITE, TEST_BIRTHDAY) {
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(1, Delete(members, "birthday", "20030819", " ", " "));
@@ -153,7 +153,7 @@ TEST(DEL_TESTSUITE, TEST_CERTI) {
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
-		EXPECT_EQ(1, add->run(mem[i]));
+		add->run(mem[i]);
 	}
 
 	EXPECT_EQ(8, Delete(members, "certi", "ADV", " ", " "));
