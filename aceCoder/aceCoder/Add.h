@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "member.h"
+#include "AddParmeterChecker.h"
 
 class Add {
 public:
@@ -8,7 +9,12 @@ public:
 	virtual ~Add() = default;
 
 	bool isValid(const member& newmem) const;
-	string run(const member& newmem);
+	int run(const member& newmem);
+	string run(const string& comand1line);
+	void  setParameterChecker(ParameterChecker* parachecker) {
+		parachecker_ = parachecker;
+	}
 private:
 	vector<member> &members_;
+	ParameterChecker* parachecker_;
 };
