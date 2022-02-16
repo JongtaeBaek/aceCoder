@@ -24,11 +24,6 @@ string certi_level[3] = {
 	"ADV", "PRO", "EX"
 };
 
-static void print_info(struct member m)
-{
-	cout << "DEL," << m.employeeNum << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << endl;
-}
-
 static void initialize_flag(void)
 {
 	for (int i = 0; i < MAXDATA; i++)
@@ -43,7 +38,6 @@ static int erase_start(vector<member>& gmembers, char* flag)
 			gmembers.erase(gmembers.begin() + i);
 		}
 	}
-
 	return 0;
 }
 
@@ -93,16 +87,6 @@ static void save_big_five_member(struct member a)
 	return;
 }
 
-static void print_big_five(void)
-{
-	for (int i = 0; i < big_five.size(); i++) {
-		print_info(big_five[i]);
-	}
-	cout << endl;
-
-	return;
-}
-
 static int Delete_employeeNum(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
@@ -114,21 +98,15 @@ static int Delete_employeeNum(vector<member>& gmembers, string str, int option1,
 			flag[i] = 1;
 			sum++;
 			save_big_five_member(gmembers[i]);
-			//printf("hit\n");
 		}
-			
 	}
-
 	erase_start(gmembers, flag);
-
-	//printf("[%s] %s\n", __func__, str);
 	return sum;
 }
 
 static int Delete_name(vector<member>& gmembers, string str, int option1, int option2)
 {
 	int sum = 0;
-
 	for (int i = 0; i < gmembers.size(); i++)
 	{
 		int position_of_blank = gmembers[i].name.find(" ");
@@ -137,12 +115,10 @@ static int Delete_name(vector<member>& gmembers, string str, int option1, int op
 
 		if (option2 == FIRST_NAME) {
 			database_name = gmembers[i].name.substr(0, position_of_blank);
-			//printf("[SGSGSGSGSTEST]\n%s\n", database_name);
 		}
 
 		else if (option2 == LAST_NAME) {
 			database_name = gmembers[i].name.substr(position_of_blank+1, gmembers[i].name.size()- position_of_blank);
-			//printf("[SGSGSGSGSTESTasd]\n%s %s\n", database_name, str);
 		}
 
 		else if (option2 == FULL_NAME) {
@@ -153,14 +129,10 @@ static int Delete_name(vector<member>& gmembers, string str, int option1, int op
 			flag[i] = 1;
 			sum++;
 			save_big_five_member(gmembers[i]);
-			//printf("hit\n");
 		}
 			
 	}
-
 	erase_start(gmembers, flag);
-
-	//printf("[%s] %s\n", __func__, str);
 	return sum;
 }
 
@@ -182,21 +154,9 @@ static int Delete_cl(vector<member>& gmembers, string str, int option1, int opti
 			flag[i] = 1;
 			sum++;
 			save_big_five_member(gmembers[i]);
-			//printf("hit\n");
 		}
-			
 	}
-
 	erase_start(gmembers, flag);
-	//print_save();
-	/*
-	printf("[%s] %s %d\n", __func__, str, gmembers.size());
-
-	for (int i = 0; i < gmembers.size(); i++)
-	{
-		print_info(gmembers[i]);
-	}
-	*/
 	return sum;
 }
 
@@ -208,7 +168,6 @@ static int Delete_phoneNum(vector<member>& gmembers, string str, int option1, in
 	{
 		int position_of_blank = gmembers[i].phoneNum.find(" ");
 		string database_name;
-
 
 		if (option2 == MIDDLE_PHONENUM) {
 			database_name = gmembers[i].phoneNum.substr(4, 4);
@@ -231,8 +190,6 @@ static int Delete_phoneNum(vector<member>& gmembers, string str, int option1, in
 	}
 
 	erase_start(gmembers, flag);
-
-	//printf("[%s] %s\n", __func__, str);
 	return sum;
 }
 
@@ -265,14 +222,10 @@ static int Delete_birthday(vector<member>& gmembers, string str, int option1, in
 			flag[i] = 1;
 			sum++;
 			save_big_five_member(gmembers[i]);
-			//printf("hit\n");
 		}
-			
 	}
 
 	erase_start(gmembers, flag);
-
-	//printf("[%s] %s\n", __func__, str);
 	return sum;
 }
 
@@ -294,14 +247,10 @@ static int Delete_certi(vector<member>& gmembers, string str, int option1, int o
 			flag[i] = 1;
 			sum++;
 			save_big_five_member(gmembers[i]);
-			//printf("hit\n");
 		}
 			
 	}
-
 	erase_start(gmembers, flag);
-
-	//printf("[%s] %s\n", __func__, str);
 	return sum;
 }
 
@@ -322,19 +271,40 @@ static void initialize_condition(void)
 	initialize_flag();
 }
 
-static void print_output(int option1, int sum)
+static string print_info(struct member m)
 {
+	ostringstream oss;
+	string first_string;
+	first_string = (m.employeeNum / 10000000) ? "DEL," : "DEL,0";
+	oss << first_string << m.employeeNum << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << "\n";
+	return oss.str();
+}
+
+static string print_big_five(void)
+{
+	string big_five_string;
+	for (int i = 0; i < big_five.size(); i++) {
+		big_five_string.append(print_info(big_five[i]));
+	}
+
+	return big_five_string;
+}
+
+static string print_output(int option1, int sum)
+{
+	string return_string;
+	ostringstream oss;
+
 	if (big_five.empty()) {
-		cout << "DEL,NONE" << endl;
-		return;
+		return "DEL,NONE\n";
 	}
 		
 	if (option1 == PRINT_ON) {
-		print_big_five();
-		return;
+		return print_big_five();
 	}
 
-	cout << "DEL," << sum << endl;
+	oss << "DEL," << sum << "\n";
+	return oss.str();
 }
 
 static int check_option(string condition, string opt1, string opt2, int& option1, int& option2)
@@ -408,11 +378,10 @@ static int check_option(string condition, string opt1, string opt2, int& option1
 		}
 		return -1;
 	}
-
 	return 0;
 }
 
-int Delete(vector<member> &members, string condition, string str, string opt1, string opt2)
+int Del::Delete(vector<member> &members, string condition, string str, string opt1, string opt2)
 {
 	int i = 0;
 	int sum = 0;
@@ -432,9 +401,23 @@ int Delete(vector<member> &members, string condition, string str, string opt1, s
 		return -1;
 
 	sum = Delete_Condition[i](members, str, option1, option2);
-	print_output(option1, sum);
-
-
 	return sum;
+}
 
+string Del::OutputReturn(string condition, string opt1, string opt2, int sum)
+{
+	string return_string;
+	int option1, option2;
+
+	if (check_option(condition, opt1, opt2, option1, option2) == -1)
+		return string();
+
+	return_string = print_output(option1, sum);
+
+	cout << return_string;
+
+	return return_string;
+}
+
+Del::Del(vector<member>& members) : members_(members) {
 }
