@@ -20,7 +20,8 @@ class Modifier : public ParameterChecker
 public:
 	Modifier(vector<member>& inputList);
 	~Modifier();
-	string run(vector<string> values);
+	string run(const string& inputstring);
+	string Modify(vector<string> values);
 private:
 	vector<member>& memberList;
 };

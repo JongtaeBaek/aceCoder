@@ -3,6 +3,7 @@
 #include "Add.h"
 #include "ADDParmeterChecker.h"
 #include "delete.h"
+#include "modifier.h"
 
 int main()
 {	
@@ -14,6 +15,7 @@ int main()
 
 	Add* add = new Add(members);
 	Del* del = new Del(members);
+	Modifier* modifier = new Modifier(members);
 
 	ofstream outputfile;
 	string outputresult;
@@ -35,6 +37,11 @@ int main()
 		else if (values[IDXCMD] == "DEL")
 		{
 			outputresult += del->run(line);
+			continue;
+		}
+		else if (values[IDXCMD] == "MOD")
+		{
+			outputresult += modifier->run(line);
 			continue;
 		}
 	}

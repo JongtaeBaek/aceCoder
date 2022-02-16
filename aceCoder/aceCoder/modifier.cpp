@@ -90,7 +90,12 @@ Modifier::~Modifier()
 {
 
 }
-string Modifier::run(vector<string> values)
+string Modifier::run(const string& inputstring)
+{
+	return Modify(parse(inputstring));
+}
+
+string Modifier::Modify(vector<string> values)
 {
 	string result = "";
 	string opt1 = values[MODPARAINDEX::MODIDXFIRSTOPT];
