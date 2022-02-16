@@ -3,13 +3,80 @@
 #include "member.h"
 #include "ParameterChecker.h"
 
-void sortMemberList(void)
+string ConvertCl(CL cl)
 {
+	if (cl == CL::CL1) return "CL1";
+	if (cl == CL::CL2) return "CL2";
+	if (cl == CL::CL3) return "CL3";
+	if (cl == CL::CL4) return "CL4";
+}
+
+string ConvertCerti(CERTI certi)
+{
+	if (certi == CERTI::ADV) return "ADV";
+	if (certi == CERTI::PRO) return "PRO";
+	if (certi == CERTI::EX) return "EX";
+}
+
+bool CompareEmployeeNum(unsigned int a, unsigned int b)
+{
+	unsigned int a_year = a / 1000000, b_year = b / 1000000;
+	unsigned int a_Num = a % 1000000, b_Num = b % 1000000;
+
+	a_year = (a_year <= 21) ? a_year + 100 : a_year;
+	b_year = (b_year <= 21) ? b_year + 100 : b_year;
+
+	if (a_year < b_year)
+		return true;
+
+	else if (a_year > b_year)
+		return false;
+
+	if (a_Num < b_Num)
+		return true;
+
+	return false;
+}
+
+void SaveSortMemberList(vector<member>& sortedList, member selectedMember)
+{
+	if (sortedList.empty())
+	{
+		sortedList.push_back(selectedMember);
+		return;
+	}
+	unsigned int lastEmployeeNum = sortedList.back().employeeNum;
+	unsigned int selectedEmployeeNum = selectedMember.employeeNum;
+
+	if ((sortedList.size() < 5) || (CompareEmployeeNum(selectedEmployeeNum, lastEmployeeNum)))
+	{
+		int i = 0;
+		for (; i < sortedList.size(); i++)
+		{
+			lastEmployeeNum = sortedList[i].employeeNum;
+			if (CompareEmployeeNum(selectedEmployeeNum, lastEmployeeNum))
+			{
+				sortedList.insert(sortedList.begin() + i, selectedMember);
+				break;
+			}
+		}
+		if (i == sortedList.size()) sortedList.push_back(selectedMember);
+	}
+
+	if (sortedList.size() > 5) sortedList.pop_back();
 
 }
-void printSearchList(void)
-{
 
+void PrintList(vector<member>& findingMembers)
+{
+	int printCount = 0;
+	for (auto member : findingMembers)
+	{
+		printCount++;
+		cout << "MOD," << member.employeeNum << "," << member.name << "," << ConvertCl(member.cl)
+			<< "," << member.phoneNum << "," << member.birthday << "," << ConvertCerti(member.certi) << endl;
+		if (printCount == 5) break;
+	}
 }
 
 Modifier::Modifier(vector<member>& inputList) : memberList(inputList)
@@ -39,7 +106,7 @@ int Modifier::Run(vector<string> values)
 	bool monthCheck = false;
 	bool dayCheck = false;
 
-	if (opt1 == "p") printOpt = true;
+	if (opt1 == "-p") printOpt = true;
 	if (opt2 == "-f")
 	{
 		firstName = true;
@@ -70,21 +137,27 @@ int Modifier::Run(vector<string> values)
 	}
 
 	vector<vector<member>::iterator> findingMember;
+	vector<member> sortedMember;
 	vector<member>::iterator iter = memberList.begin();
 
-	for (; iter != memberList.end(); iter++ )
+	if (findingIndex == "employeeNum")
 	{
-		if (findingIndex == "employeeNum")
+		for (; iter != memberList.end(); iter++)
 		{
 			if (iter->employeeNum == stoul(findingValue))
 			{
+				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
 				findingMember.push_back(iter);
 			}
 		}
-		else if (findingIndex == "name")
+	}
+	else if (findingIndex == "name")
+	{
+		string expectName = findingValue;
+
+		for (; iter != memberList.end(); iter++)
 		{
 			string verifyName = iter->name;
-			string expectName = findingValue;
 			int positionOfBlank = verifyName.find(" ");
 			if (firstName == true)
 			{
@@ -96,35 +169,48 @@ int Modifier::Run(vector<string> values)
 			}
 			if (expectName == verifyName)
 			{
+				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
 				findingMember.push_back(iter);
 			}
 		}
-		else if (findingIndex == "cl")
+	}
+	else if (findingIndex == "cl")
+	{
+		CL expectCl = getCL(findingValue);
+		for (; iter != memberList.end(); iter++)
 		{
-			CL expectCl = getCL(findingValue);
 			if (iter->cl == expectCl)
 			{
+				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
 				findingMember.push_back(iter);
 			}
 		}
-		else if (findingIndex == "phoneNum")
+	}
+	else if (findingIndex == "phoneNum")
+	{
+		string expectPhoneNum = findingValue;
+		for (; iter != memberList.end(); iter++)
 		{
 			string verifyPhoneNum = iter->phoneNum;
-			string expectPhoneNum = findingValue;
+
 			if (middleNumber == true)
 			{
 				verifyPhoneNum = verifyPhoneNum.substr(4, 4);
 			}
 			else if (lastNumber == true)
 			{
-				verifyPhoneNum = verifyPhoneNum.substr(9,4);
+				verifyPhoneNum = verifyPhoneNum.substr(9, 4);
 			}
 			if (expectPhoneNum == verifyPhoneNum)
 			{
+				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
 				findingMember.push_back(iter);
 			}
 		}
-		else if (findingIndex == "birthday")
+	}
+	else if (findingIndex == "birthday")
+	{
+		for (; iter != memberList.end(); iter++)
 		{
 			unsigned int savedbirthday = iter->birthday;
 			if (yearCheck == true)
@@ -141,45 +227,77 @@ int Modifier::Run(vector<string> values)
 			}
 			if (savedbirthday == stoul(findingValue))
 			{
-				findingMember.push_back(iter);
-			}
-		}
-		else if (findingIndex == "certi")
-		{
-			CERTI expectCerti = getCELTI(findingValue);
-			if (iter->certi == expectCerti)
-			{
+				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
 				findingMember.push_back(iter);
 			}
 		}
 	}
-	if (findingMember.empty() == true) return -1;
+	else if (findingIndex == "certi")
+	{
+		CERTI expectCerti = getCELTI(findingValue);
+		for (; iter != memberList.end(); iter++)
+		{
+			if (iter->certi == expectCerti)
+			{
+				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
+				findingMember.push_back(iter);
+			}
+		}
+	}
+
+	if (findingMember.empty() == true)
+	{
+		cout << "MOD,NONE" << endl;
+		return -1;
+	}
 
 	if (printOpt == true)
 	{
-		sortMemberList();
-		printSearchList();
+		PrintList(sortedMember);
+	}
+	else
+	{
+		if (findingMember.size() > 5)
+		{
+			cout << "MOD,5" << endl;
+		}
+		else
+		{
+			cout << "MOD," << findingMember.size() << endl;
+		}
 	}
 
-	for (auto changeMember : findingMember)
+	if (changingIndex == "name")
 	{
-		if (changingIndex == "name")
+		for (auto changeMember : findingMember)
 		{
 			changeMember->name = changingValue;
 		}
-		else if (changingIndex == "cl")
+	}
+	else if (changingIndex == "cl")
+	{
+		for (auto changeMember : findingMember)
 		{
 			changeMember->cl = getCL(changingValue);
 		}
-		else if (changingIndex == "phoneNum")
+	}
+	else if (changingIndex == "phoneNum")
+	{
+		for (auto changeMember : findingMember)
 		{
 			changeMember->phoneNum = changingValue;
 		}
-		else if (changingIndex == "birthday")
+	}
+	else if (changingIndex == "birthday")
+	{
+		for (auto changeMember : findingMember)
 		{
 			changeMember->birthday = stoul(changingValue);
 		}
-		else if (changingIndex == "certi")
+	}
+	else if (changingIndex == "certi")
+	{
+		for (auto changeMember : findingMember)
 		{
 			changeMember->certi = getCELTI(changingValue);
 		}
