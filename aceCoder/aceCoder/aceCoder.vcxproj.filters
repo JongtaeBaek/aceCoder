@@ -14,6 +14,7 @@
     <ClCompile Include="AddParmeterChecker.cpp" />
     <ClCompile Include="Add.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SchParameterChecker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Add.h" />
@@ -24,6 +25,7 @@
     <ClInclude Include="delete.h" />
     <ClInclude Include="Sch.h" />
     <ClInclude Include="AddParmeterChecker.h" />
+    <ClInclude Include="SchParameterChecker.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

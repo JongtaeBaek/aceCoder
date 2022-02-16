@@ -41,6 +41,7 @@
     <ClInclude Include="ParameterChecker.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sch.h" />
+    <ClInclude Include="SchParameterChecker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Add.cpp" />
@@ -51,6 +52,7 @@
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="modify_test.cpp" />
     <ClCompile Include="Sch.cpp" />
+    <ClCompile Include="SchParameterChecker.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

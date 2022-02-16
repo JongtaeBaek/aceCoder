@@ -134,6 +134,13 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 				}
 			}
 		}
+		else if (cmd_arr[2] == " ") {
+			for (auto member : members_) {
+				if (member.phoneNum == cmd_arr[5]) {
+					ret.push_back(member);
+				}
+			}
+		}
 		else {
 			return ret;
 		}
@@ -156,6 +163,13 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 		else if (cmd_arr[2] == "-d") {
 			for (auto member : members_) {
 				if (to_string(member.birthday).substr(6, 2) == cmd_arr[5]) {
+					ret.push_back(member);
+				}
+			}
+		}
+		else if (cmd_arr[2] == " ") {
+			for (auto member : members_) {
+				if (to_string(member.birthday) == cmd_arr[5]) {
 					ret.push_back(member);
 				}
 			}
@@ -185,3 +199,4 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 	return ret;
 
 }
+
