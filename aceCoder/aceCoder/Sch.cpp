@@ -45,9 +45,36 @@ string Sch::convert_ID(int num){
 	return ret;
 }
 
-void Sch::Sort_member(vector <member> &members) {
-	//구현 예정
+bool Sch::compare_fifth_member(const member& A, const member& B) {
+	return !memcmp(&A, &B, sizeof(member));
 }
+
+bool Sch::compare_ID(const member& A, const member& B) {
+	unsigned int A_id_year = stoi(convert_ID(A.employeeNum).substr(0, 2));
+	unsigned int B_id_year = stoi(convert_ID(B.employeeNum).substr(0, 2));
+	
+	A_id_year = (A_id_year < 22) ? A_id_year + 100 : A_id_year;
+	B_id_year = (B_id_year < 22) ? B_id_year + 100 : B_id_year;
+
+	return A_id_year < B_id_year;
+}
+
+void Sch::Sort_member(vector <member> &members) {
+	if (members.size() <= 1) {
+		return;
+	}
+	for (int i = 0; i < members.size() - 1; i++) {
+		for (int j = i + 1; j < members.size(); j++) {
+			if (!compare_ID(members[i], members[j])) {
+				member tmp = members[j];
+				members[j] = members[i];
+				members[i] = tmp;
+			}
+		}
+	}
+}
+
+
 
 vector<member>  Sch::search(string cmd, vector<member>& members_) {
 	vector<member> ret;
@@ -68,6 +95,13 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 			for (auto member : members_) {
 				vector <string> name_arr = split(member.name, " ");
 				if (name_arr[1] == cmd_arr[5]) {
+					ret.push_back(member);
+				}
+			}
+		}
+		else if (cmd_arr[2] == " ") {
+			for (auto member : members_) {
+				if (member.name == cmd_arr[5]) {
 					ret.push_back(member);
 				}
 			}
@@ -128,6 +162,20 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 		}
 		else {
 			return ret;
+		}
+	}
+	else if (cmd_arr[4] == "certi") {
+		for (auto member : members_) {
+			if (convert_CERTI(member.certi) == cmd_arr[5]) {
+				ret.push_back(member);
+			}
+		}
+	}
+	else if (cmd_arr[4] == "employeeNum") {
+		for (auto member : members_) {
+			if (convert_ID(member.employeeNum) == cmd_arr[5]) {
+				ret.push_back(member);
+			}
 		}
 	}
 	else {
