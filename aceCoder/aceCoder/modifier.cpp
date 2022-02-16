@@ -31,7 +31,6 @@ int Modifier::Run(vector<string> values)
 	string changingValue = values[MODPARAINDEX::MODIDXCHANGEVALUE];
 
 	bool printOpt = false;
-	if (opt1 == "p") printOpt = true;
 	bool firstName = false;
 	bool lastName = false;
 	bool middleNumber = false;
@@ -41,35 +40,33 @@ int Modifier::Run(vector<string> values)
 	bool dayCheck = false;
 
 	if (opt1 == "p") printOpt = true;
-
-	switch (*opt2.c_str())
+	if (opt2 == "-f")
 	{
-	case 'f':
 		firstName = true;
-		break;
-	case 'l':
+	}
+	else if (opt2 == "-l")
+	{
 		lastName = true;
 		lastNumber = true;
-		break;
-	case 'm':
+	}
+	else if (opt2 == "-m")
+	{
+		middleNumber = true;
 		firstName = true;
 		monthCheck = true;
-		break;
-	case 'y':
+	}
+	else if (opt2 == "-y")
+	{
 		yearCheck = true;
-		break;
-	case 'd':
+	}
+	else if (opt2 == "-d")
+	{
 		dayCheck = true;
-		break;
-	default:
-		break;
 	}
 
-	switch (*opt3.c_str())
+	if (opt3 != " ")
 	{
-	default:
 		cout << "not supported option" << endl;
-		break;
 	}
 
 	vector<vector<member>::iterator> findingMember;
@@ -84,24 +81,25 @@ int Modifier::Run(vector<string> values)
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "name")
+		else if (findingIndex == "name")
 		{
 			string verifyName = iter->name;
 			string expectName = findingValue;
+			int positionOfBlank = verifyName.find(" ");
 			if (firstName == true)
 			{
-				expectName.find(' ');
+				verifyName = verifyName.substr(0, positionOfBlank);
 			}
-			if (lastName == true)
+			else if (lastName == true)
 			{
-				expectName.find(' ');
+				verifyName = verifyName.substr(positionOfBlank + 1, verifyName.size() - positionOfBlank);
 			}
-			if (expectName == findingValue)
+			if (expectName == verifyName)
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "cl")
+		else if (findingIndex == "cl")
 		{
 			CL expectCl = getCL(findingValue);
 			if (iter->cl == expectCl)
@@ -109,44 +107,44 @@ int Modifier::Run(vector<string> values)
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "phoneNum")
+		else if (findingIndex == "phoneNum")
 		{
 			string verifyPhoneNum = iter->phoneNum;
 			string expectPhoneNum = findingValue;
 			if (middleNumber == true)
 			{
-				expectPhoneNum.find('-');
+				verifyPhoneNum = verifyPhoneNum.substr(4, 4);
 			}
-			if (lastNumber == true)
+			else if (lastNumber == true)
 			{
-				expectPhoneNum.find('-');
+				verifyPhoneNum = verifyPhoneNum.substr(9,4);
 			}
 			if (expectPhoneNum == verifyPhoneNum)
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "birthday")
+		else if (findingIndex == "birthday")
 		{
-			unsigned int expectbirthday = iter->birthday;
+			unsigned int savedbirthday = iter->birthday;
 			if (yearCheck == true)
 			{
-				expectbirthday &= 0xF0;
+				savedbirthday = savedbirthday / 10000;
 			}
-			if (monthCheck == true)
+			else if (monthCheck == true)
 			{
-				expectbirthday &= 0xF0;
+				savedbirthday = (savedbirthday % 10000) / 100;
 			}
-			if (dayCheck == true)
+			else if (dayCheck == true)
 			{
-				expectbirthday &= 0xF0;
+				savedbirthday = savedbirthday % 100;
 			}
-			if (iter->birthday == stoul(findingValue))
+			if (savedbirthday == stoul(findingValue))
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "certi")
+		else if (findingIndex == "certi")
 		{
 			CERTI expectCerti = getCELTI(findingValue);
 			if (iter->certi == expectCerti)
@@ -157,8 +155,11 @@ int Modifier::Run(vector<string> values)
 	}
 	if (findingMember.empty() == true) return -1;
 
-	sortMemberList();
-	printSearchList();
+	if (printOpt == true)
+	{
+		sortMemberList();
+		printSearchList();
+	}
 
 	for (auto changeMember : findingMember)
 	{
@@ -166,19 +167,19 @@ int Modifier::Run(vector<string> values)
 		{
 			changeMember->name = changingValue;
 		}
-		if (changingIndex == "cl")
+		else if (changingIndex == "cl")
 		{
 			changeMember->cl = getCL(changingValue);
 		}
-		if (changingIndex == "phoneNum")
+		else if (changingIndex == "phoneNum")
 		{
 			changeMember->phoneNum = changingValue;
 		}
-		if (changingIndex == "birthday")
+		else if (changingIndex == "birthday")
 		{
 			changeMember->birthday = stoul(changingValue);
 		}
-		if (changingIndex == "certi")
+		else if (changingIndex == "certi")
 		{
 			changeMember->certi = getCELTI(changingValue);
 		}
