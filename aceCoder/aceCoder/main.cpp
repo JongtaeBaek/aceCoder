@@ -16,7 +16,9 @@ int main()
 	Del* del = new Del(members);
 
 	ofstream outputfile;
+	string outputresult;
 	outputfile.open(".\\output.txt");
+
 
 	for (const auto& line : lines) {
 		vector<string> values = para->parse(line);
@@ -30,20 +32,15 @@ int main()
 			add->run(mem);
 		}
 
-		else{
-			/*TODO
-			* each command rresult accumulation
-			*/
-			if (values[IDXCMD] == "DEL")
-			{
-				outputfile << del->run(line);
-			}
+		else if (values[IDXCMD] == "DEL")
+		{
+			outputresult += del->run(line);
 			continue;
-
 		}
 	}
 
 	/*TODO :fille save*/
+	outputfile << outputresult;
 	outputfile.close();
 
 	delete add;
