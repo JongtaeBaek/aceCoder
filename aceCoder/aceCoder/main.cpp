@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "Add.h"
 #include "ADDParmeterChecker.h"
+#include "delete.h"
 
 int main()
 {	
@@ -12,7 +13,11 @@ int main()
 		return 	EXIT_FAILURE;
 
 	Add* add = new Add(members);
-	
+	Del* del = new Del(members);
+
+	ofstream outputfile;
+	outputfile.open(".\\output.txt");
+
 	for (const auto& line : lines) {
 		vector<string> values = para->parse(line);
 		if (values[IDXCMD] == "ADD")
@@ -24,16 +29,24 @@ int main()
 				continue;
 			add->run(mem);
 		}
+
 		else{
-			continue;
-			/*TODO 
+			/*TODO
 			* each command rresult accumulation
 			*/
+			if (values[IDXCMD] == "DEL")
+			{
+				outputfile << del->run(line);
+			}
+			continue;
+
 		}
 	}
 
 	/*TODO :fille save*/
+	outputfile.close();
 
 	delete add;
+	delete del;
 	delete para;
 }
