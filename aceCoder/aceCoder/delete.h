@@ -25,16 +25,6 @@ using namespace std;
 #define MONTH_BIRTHDAY	(2)
 #define DAY_BIRTHDAY	(3)
 
-enum condition {
-	EMPLOYEENUM = 0,
-	NAME,
-	CL,
-	PHONENUM,
-	BIRTHDAY,
-	CERTI,
-	NUM_OF_CONDITION
-};
-
 //int Delete(vector<member>& members, string condition, string str, string opt1, string opt2);
 
 
