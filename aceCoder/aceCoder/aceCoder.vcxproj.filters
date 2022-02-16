@@ -11,6 +11,8 @@
     <ClCompile Include="test_delete.cpp" />
     <ClCompile Include="Sch.cpp" />
     <ClCompile Include="test_SCH.cpp" />
+    <ClCompile Include="AddParmeterChecker.cpp" />
+    <ClCompile Include="Add.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Add.h" />
@@ -20,6 +22,7 @@
     <ClInclude Include="modifier.h" />
     <ClInclude Include="delete.h" />
     <ClInclude Include="Sch.h" />
+    <ClInclude Include="AddParmeterChecker.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -31,6 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="input\inputAdd.txt">
+      <Filter>input</Filter>
+    </Text>
+    <Text Include="input\input_20_20.txt">
       <Filter>input</Filter>
     </Text>
   </ItemGroup>

@@ -34,6 +34,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="Add.h" />
+    <ClInclude Include="AddParmeterChecker.h" />
     <ClInclude Include="delete.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="modifier.h" />
@@ -42,6 +43,8 @@
     <ClInclude Include="Sch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Add.cpp" />
+    <ClCompile Include="AddParmeterChecker.cpp" />
     <ClCompile Include="delete.cpp" />
     <ClCompile Include="member.cpp" />
     <ClCompile Include="modifier.cpp" />
@@ -63,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="input\inputAdd.txt" />
+    <Text Include="input\input_20_20.txt" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
