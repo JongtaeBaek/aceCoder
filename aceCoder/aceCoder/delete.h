@@ -1,7 +1,9 @@
 #pragma once
 #include"pch.h"
 #include"member.h"
-
+#include<sstream>
+#include<vector>
+using namespace std;
 
 #define MAXDATA		(100000)
 
@@ -33,4 +35,32 @@ enum condition {
 	NUM_OF_CONDITION
 };
 
-int Delete(vector<member>& members, string condition, string str, string opt1, string opt2);
+//int Delete(vector<member>& members, string condition, string str, string opt1, string opt2);
+
+
+class Del {
+public:
+	Del(vector<member>& members);
+	virtual ~Del() = default;
+
+	int Delete(vector<member>& members, string condition, string str, string opt1, string opt2);
+	
+	string run(string cmd) {
+		vector<string> arg;
+		arg.clear();
+		istringstream ss(cmd);
+		string stringBuffer;
+		int sum;
+		while (getline(ss, stringBuffer, ',')) {
+			arg.push_back(stringBuffer);
+		}
+		sum = Delete(members_, arg[4], arg[5], arg[1], arg[2]);
+		if (sum != -1) {
+			return OutputReturn(arg[4], arg[1], arg[2], sum);
+		}
+		return string();
+	};
+private:
+	vector<member>& members_;
+	string OutputReturn(string condition, string opt1, string opt2, int sum);
+};

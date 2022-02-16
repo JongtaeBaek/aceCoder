@@ -30,18 +30,20 @@ TEST(DEL_TESTSUITE, TEST_EMPLOYEENUM) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(1, Delete(members, "employeeNum", "14130827", " ", " "));
-	EXPECT_EQ(1, Delete(members, "employeeNum", "10127115", " ", " "));
-	EXPECT_EQ(1, Delete(members, "employeeNum", "18115040", "-p", " "));
-	EXPECT_EQ(0, Delete(members, "employeeNum", "99999999", "-p", " "));
+	EXPECT_EQ(1, del->Delete(members, "employeeNum", "14130827", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "employeeNum", "10127115", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "employeeNum", "18115040", "-p", " "));
+	EXPECT_EQ(0, del->Delete(members, "employeeNum", "99999999", "-p", " "));
 
 	delete add;
+	delete del;
 }
 
 TEST(DEL_TESTSUITE, TEST_NAME) {
@@ -49,18 +51,20 @@ TEST(DEL_TESTSUITE, TEST_NAME) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(1, Delete(members, "name", "KBU MHU", " ", " "));
-	EXPECT_EQ(1, Delete(members, "name", "VCUHLE HMU", "-p", " "));
-	EXPECT_EQ(1, Delete(members, "name", "RTAH VNUP", " ", " "));
-	EXPECT_EQ(0, Delete(members, "name", "Sanggu", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "name", "KBU MHU", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "name", "VCUHLE HMU", "-p", " "));
+	EXPECT_EQ(1, del->Delete(members, "name", "RTAH VNUP", " ", " "));
+	EXPECT_EQ(0, del->Delete(members, "name", "Sanggu", " ", " "));
 
 	delete add;
+	delete del;
 }
 
 TEST(DEL_TESTSUITE, TEST_NAME_FL) {
@@ -68,18 +72,20 @@ TEST(DEL_TESTSUITE, TEST_NAME_FL) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(1, Delete(members, "name", "KBU MHU", " ", " "));
-	EXPECT_EQ(1, Delete(members, "name", "VCUHLE", " ", "-f"));
-	EXPECT_EQ(1, Delete(members, "name", "VNUP", " ", "-l"));
-	EXPECT_EQ(0, Delete(members, "name", "Sanggu YEO", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "name", "KBU MHU", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "name", "VCUHLE", " ", "-f"));
+	EXPECT_EQ(1, del->Delete(members, "name", "VNUP", " ", "-l"));
+	EXPECT_EQ(0, del->Delete(members, "name", "Sanggu YEO", " ", " "));
 
 	delete add;
+	delete del;
 }
 
 TEST(DEL_TESTSUITE, TEST_CL) {
@@ -87,19 +93,21 @@ TEST(DEL_TESTSUITE, TEST_CL) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 	
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(5, Delete(members, "cl", "CL1", "-p", " "));
-	EXPECT_EQ(2, Delete(members, "cl", "CL2", "-p", " "));
-	EXPECT_EQ(4, Delete(members, "cl", "CL3", "-p", " "));
-	EXPECT_EQ(0, Delete(members, "cl", "CL3", "-p", " "));
-	EXPECT_EQ(9, Delete(members, "cl", "CL4", "-p", " "));
+	EXPECT_EQ(5, del->Delete(members, "cl", "CL1", "-p", " "));
+	EXPECT_EQ(2, del->Delete(members, "cl", "CL2", "-p", " "));
+	EXPECT_EQ(4, del->Delete(members, "cl", "CL3", "-p", " "));
+	EXPECT_EQ(0, del->Delete(members, "cl", "CL3", "-p", " "));
+	EXPECT_EQ(9, del->Delete(members, "cl", "CL4", "-p", " "));
 
 	delete add;
+	delete del;
 }
 
 TEST(DEL_TESTSUITE, TEST_PHONENUM) {
@@ -107,20 +115,22 @@ TEST(DEL_TESTSUITE, TEST_PHONENUM) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(1, Delete(members, "phoneNum", "010-8900-1478", " ", " "));
-	EXPECT_EQ(1, Delete(members, "phoneNum", "010-5798-5383", " ", " "));
-	EXPECT_EQ(0, Delete(members, "phoneNum", "010-5798-5383", " ", " "));
-	EXPECT_EQ(0, Delete(members, "phoneNum", "010-9999-9999", " ", " "));
-	EXPECT_EQ(1, Delete(members, "phoneNum", "6672", "-p", "-m"));
-	EXPECT_EQ(1, Delete(members, "phoneNum", "1077", "-p", "-l"));
-	EXPECT_EQ(0, Delete(members, "phoneNum", "9999", "-p", "-l"));
+	EXPECT_EQ(1, del->Delete(members, "phoneNum", "010-8900-1478", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "phoneNum", "010-5798-5383", " ", " "));
+	EXPECT_EQ(0, del->Delete(members, "phoneNum", "010-5798-5383", " ", " "));
+	EXPECT_EQ(0, del->Delete(members, "phoneNum", "010-9999-9999", " ", " "));
+	EXPECT_EQ(1, del->Delete(members, "phoneNum", "6672", "-p", "-m"));
+	EXPECT_EQ(1, del->Delete(members, "phoneNum", "1077", "-p", "-l"));
+	EXPECT_EQ(0, del->Delete(members, "phoneNum", "9999", "-p", "-l"));
 	delete add;
+	delete del;
 }
 
 TEST(DEL_TESTSUITE, TEST_BIRTHDAY) {
@@ -128,21 +138,23 @@ TEST(DEL_TESTSUITE, TEST_BIRTHDAY) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(1, Delete(members, "birthday", "20030819", " ", " "));
-	EXPECT_EQ(0, Delete(members, "birthday", "20030819", " ", " "));
-	EXPECT_EQ(0, Delete(members, "birthday", "99999999", "-p", " "));
-	EXPECT_EQ(1, Delete(members, "birthday", "19780228", "-p", " "));
-	EXPECT_EQ(2, Delete(members, "birthday", "2012", "-p", "-y"));
-	EXPECT_EQ(2, Delete(members, "birthday", "12", " ", "-m"));
-	EXPECT_EQ(2, Delete(members, "birthday", "17", " ", "-d"));
+	EXPECT_EQ(1, del->Delete(members, "birthday", "20030819", " ", " "));
+	EXPECT_EQ(0, del->Delete(members, "birthday", "20030819", " ", " "));
+	EXPECT_EQ(0, del->Delete(members, "birthday", "99999999", "-p", " "));
+	EXPECT_EQ(1, del->Delete(members, "birthday", "19780228", "-p", " "));
+	EXPECT_EQ(2, del->Delete(members, "birthday", "2012", "-p", "-y"));
+	EXPECT_EQ(2, del->Delete(members, "birthday", "12", " ", "-m"));
+	EXPECT_EQ(2, del->Delete(members, "birthday", "17", " ", "-d"));
 
 	delete add;
+	delete del;
 }
 
 TEST(DEL_TESTSUITE, TEST_CERTI) {
@@ -150,16 +162,37 @@ TEST(DEL_TESTSUITE, TEST_CERTI) {
 	vector<member> members;
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
+	Del* del = new Del(members);
 
 	for (int i = 0; i < 20; i++) {
 		EXPECT_TRUE(add->isValid(mem[i]));
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(8, Delete(members, "certi", "ADV", " ", " "));
-	EXPECT_EQ(0, Delete(members, "certi", "ADV", "-p", " "));
-	EXPECT_EQ(12, Delete(members, "certi", "PRO", "-p", " "));
-	EXPECT_EQ(0, Delete(members, "certi", "EX", " ", " "));
+	EXPECT_EQ(8, del->Delete(members, "certi", "ADV", " ", " "));
+	EXPECT_EQ(0, del->Delete(members, "certi", "ADV", "-p", " "));
+	EXPECT_EQ(12, del->Delete(members, "certi", "PRO", "-p", " "));
+	EXPECT_EQ(0, del->Delete(members, "certi", "EX", " ", " "));
 
 	delete add;
+	delete del;
+}
+
+
+TEST(DEL_TESTSUITE, TEST_RUN) {
+
+	vector<member> members;
+	Add* add = new Add(members);
+	Del* del = new Del(members);
+
+	for (int i = 0; i < 20; i++) {
+		EXPECT_TRUE(add->isValid(mem[i]));
+		add->run(mem[i]);
+	}
+
+	EXPECT_EQ("DEL,1\n", del->run("DEL, , , ,employeeNum,18115040"));
+	del->run("DEL,-p, , ,cl,CL4");
+
+	delete add;
+	delete del;
 }
