@@ -1,7 +1,6 @@
 #pragma once
 #include "pch.h"
 #include "Add.h"
-#include "ADDParmeterChecker.h"
 
 TEST(ADD_TESTSUITE, TEST_PARAMETER) {
 	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
@@ -75,6 +74,38 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE2) {
 	}
 
 	EXPECT_EQ(20, members.size());
+
+	delete add;
+	delete para;
+}
+
+TEST(ADD_TESTSUITE, TEST_INPUTFILE3) {
+	vector<member> members;
+	ParameterChecker* para = new AddParmeterChecker();
+	vector<string>lines = para->loadTxt(".\\input\\input_20_20.txt");
+	ASSERT_NE(0, lines.size());
+	Add* add = new Add(members);
+	add->setParameterChecker(para);
+	for (const auto& line : lines) {
+		vector<string> values = para->parse(line);
+		if (values[IDXCMD] == "ADD")
+		{
+			add->run(line);
+		}
+		else
+			continue;
+	}
+
+	EXPECT_EQ(20, members.size());
+
+	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
+	EXPECT_EQ(add->run(str), string{""});
+	str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906";
+	EXPECT_NE(add->run(str), string{ "" });
+	str = "XXX, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
+	EXPECT_NE(add->run(str), string{ "" });
+	str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
+	EXPECT_NE(add->run(str), string{ "" });
 
 	delete add;
 	delete para;

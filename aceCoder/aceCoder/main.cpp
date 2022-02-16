@@ -1,7 +1,6 @@
 #include <iostream>
 #include "pch.h"
 #include "Add.h"
-#include "ADDParmeterChecker.h"
 #include "delete.h"
 #include "modifier.h"
 
@@ -14,39 +13,29 @@ int main()
 		return 	EXIT_FAILURE;
 
 	Add* add = new Add(members);
+	add->setParameterChecker(para);
 	Del* del = new Del(members);
 	Modifier* modifier = new Modifier(members);
-
-	ofstream outputfile;
 	string outputresult;
-	outputfile.open(".\\output.txt");
-
 
 	for (const auto& line : lines) {
 		vector<string> values = para->parse(line);
 		if (values[IDXCMD] == "ADD")
 		{
-			if (!para->isValid(values))
-				continue;
-			const member mem = para->convert(values);
-			if (!add->isValid(mem))
-				continue;
-			add->run(mem);
+			add->run(line);
 		}
-
 		else if (values[IDXCMD] == "DEL")
 		{
 			outputresult += del->run(line);
-			continue;
 		}
 		else if (values[IDXCMD] == "MOD")
 		{
 			outputresult += modifier->run(line);
-			continue;
 		}
 	}
 
-	/*TODO :fille save*/
+	ofstream outputfile;
+	outputfile.open(".\\output.txt");
 	outputfile << outputresult;
 	outputfile.close();
 
