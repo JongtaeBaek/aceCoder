@@ -72,7 +72,8 @@ string PrintList(vector<member>& findingMembers)
 	string result;
 	for (auto member : findingMembers)
 	{
-		result += "MOD," + to_string(member.employeeNum);
+		result += (member.employeeNum / 10000000) ? "MOD," : "MOD,0";
+		result += to_string(member.employeeNum);
 		result += "," + member.name;
 		result += "," + ConvertCl(member.cl);
 		result += "," + member.phoneNum;

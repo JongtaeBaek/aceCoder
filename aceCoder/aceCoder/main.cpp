@@ -48,4 +48,5 @@ int main()
 	delete add;
 	delete del;
 	delete para;
+	delete modifier;
 }
