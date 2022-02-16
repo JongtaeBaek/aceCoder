@@ -14,27 +14,6 @@ const int EMPLOYEENUMSIZE = 8;
 const int BIRTHDAYSIZE = 8;
 
 class ParameterChecker {
-private:
-	CL getCL(string& str) const {
-		if (str == "CL1")
-			return CL::CL1;
-		else if ( str == "CL2")
-			return CL::CL2;
-		else if (str == "CL3")
-			return CL::CL3;
-
-		return CL::CL4;
-	}
-
-	CERTI getCELTI(string &str) const {
-		if (str == "ADV")
-			return CERTI::ADV;
-		else if (str == "PRO")
-			return CERTI::PRO;
-
-		return CERTI::EX;
-	}
-
 public:
 	member convert(vector<string>& values) const {
 		member result{ 0 };
@@ -150,6 +129,26 @@ public:
 		}
 
 		return true;
+	}
+
+	CL getCL(string& str) const {
+		if (str == "CL1")
+			return CL::CL1;
+		else if (str == "CL2")
+			return CL::CL2;
+		else if (str == "CL3")
+			return CL::CL3;
+
+		return CL::CL4;
+	}
+
+	CERTI getCELTI(string& str) const {
+		if (str == "ADV")
+			return CERTI::ADV;
+		else if (str == "PRO")
+			return CERTI::PRO;
+
+		return CERTI::EX;
 	}
 private:
 

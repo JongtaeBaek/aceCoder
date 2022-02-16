@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "modifier.h"
 #include "member.h"
+#include "ParameterChecker.h"
 
 void sortMemberList(void)
 {
@@ -19,12 +20,17 @@ Modifier::~Modifier()
 {
 
 }
-
-int Modifier::Run(char opt1, char opt2, char opt3,
-	string findingIndex, string findingValue, string changingIndex, string changingValue)
+int Modifier::Run(vector<string> values)
 {
+	string opt1 = values[MODPARAINDEX::MODIDXFIRSTOPT];
+	string opt2 = values[MODPARAINDEX::MODIDXSECONDOPT];
+	string opt3 = values[MODPARAINDEX::MODIDXTHIRDOPT];
+	string findingIndex = values[MODPARAINDEX::MODIDXSEARCHOPTION];
+	string findingValue = values[MODPARAINDEX::MODIDXSEARCHVALUE];
+	string changingIndex = values[MODPARAINDEX::MODIDXCHANGEOPTION];
+	string changingValue = values[MODPARAINDEX::MODIDXCHANGEVALUE];
+
 	bool printOpt = false;
-	if (opt1 == 'p') printOpt = true;
 	bool firstName = false;
 	bool lastName = false;
 	bool middleNumber = false;
@@ -33,42 +39,39 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 	bool monthCheck = false;
 	bool dayCheck = false;
 
-	if (opt1 == 'p') printOpt = true;
-
-	switch (opt2)
+	if (opt1 == "p") printOpt = true;
+	if (opt2 == "-f")
 	{
-	case 'f':
 		firstName = true;
-		break;
-	case 'l':
+	}
+	else if (opt2 == "-l")
+	{
 		lastName = true;
 		lastNumber = true;
-		break;
-	case 'm':
+	}
+	else if (opt2 == "-m")
+	{
+		middleNumber = true;
 		firstName = true;
 		monthCheck = true;
-		break;
-	case 'y':
+	}
+	else if (opt2 == "-y")
+	{
 		yearCheck = true;
-		break;
-	case 'd':
+	}
+	else if (opt2 == "-d")
+	{
 		dayCheck = true;
-		break;
-	default:
-		break;
 	}
 
-	switch (opt3)
+	if (opt3 != " ")
 	{
-	default:
 		cout << "not supported option" << endl;
-		break;
 	}
 
 	vector<vector<member>::iterator> findingMember;
 	vector<member>::iterator iter = memberList.begin();
 
-	//for (auto findMember : memberList)
 	for (; iter != memberList.end(); iter++ )
 	{
 		if (findingIndex == "employeeNum")
@@ -78,78 +81,72 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "name")
+		else if (findingIndex == "name")
 		{
 			string verifyName = iter->name;
 			string expectName = findingValue;
+			int positionOfBlank = verifyName.find(" ");
 			if (firstName == true)
 			{
-				expectName.find(' ');
+				verifyName = verifyName.substr(0, positionOfBlank);
 			}
-			if (lastName == true)
+			else if (lastName == true)
 			{
-				expectName.find(' ');
+				verifyName = verifyName.substr(positionOfBlank + 1, verifyName.size() - positionOfBlank);
 			}
-			if (expectName == findingValue)
+			if (expectName == verifyName)
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "cl")
+		else if (findingIndex == "cl")
 		{
-			CL expectCl = CL::CL1;
-			if (findingValue == "CL1") expectCl = CL::CL1;
-			if (findingValue == "CL2") expectCl = CL::CL2;
-			if (findingValue == "CL3") expectCl = CL::CL3;
-			if (findingValue == "CL4") expectCl = CL::CL4;
+			CL expectCl = getCL(findingValue);
 			if (iter->cl == expectCl)
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "phoneNum")
+		else if (findingIndex == "phoneNum")
 		{
 			string verifyPhoneNum = iter->phoneNum;
 			string expectPhoneNum = findingValue;
 			if (middleNumber == true)
 			{
-				expectPhoneNum.find('-');
+				verifyPhoneNum = verifyPhoneNum.substr(4, 4);
 			}
-			if (lastNumber == true)
+			else if (lastNumber == true)
 			{
-				expectPhoneNum.find('-');
+				verifyPhoneNum = verifyPhoneNum.substr(9,4);
 			}
 			if (expectPhoneNum == verifyPhoneNum)
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "birthday")
+		else if (findingIndex == "birthday")
 		{
-			unsigned int expectbirthday = iter->birthday;
+			unsigned int savedbirthday = iter->birthday;
 			if (yearCheck == true)
 			{
-				expectbirthday &= 0xF0;
+				savedbirthday = savedbirthday / 10000;
 			}
-			if (monthCheck == true)
+			else if (monthCheck == true)
 			{
-				expectbirthday &= 0xF0;
+				savedbirthday = (savedbirthday % 10000) / 100;
 			}
-			if (dayCheck == true)
+			else if (dayCheck == true)
 			{
-				expectbirthday &= 0xF0;
+				savedbirthday = savedbirthday % 100;
 			}
-			if (iter->birthday == stoul(findingValue))
+			if (savedbirthday == stoul(findingValue))
 			{
 				findingMember.push_back(iter);
 			}
 		}
-		if (findingIndex == "certi")
+		else if (findingIndex == "certi")
 		{
-			CERTI expectCerti = CERTI::ADV;
-			if (findingValue == "ADV") expectCerti = CERTI::ADV;
-			if (findingValue == "PRO") expectCerti = CERTI::PRO;
-			if (findingValue == "EX") expectCerti = CERTI::EX;
+			CERTI expectCerti = getCELTI(findingValue);
 			if (iter->certi == expectCerti)
 			{
 				findingMember.push_back(iter);
@@ -158,8 +155,11 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 	}
 	if (findingMember.empty() == true) return -1;
 
-	sortMemberList();
-	printSearchList();
+	if (printOpt == true)
+	{
+		sortMemberList();
+		printSearchList();
+	}
 
 	for (auto changeMember : findingMember)
 	{
@@ -167,30 +167,21 @@ int Modifier::Run(char opt1, char opt2, char opt3,
 		{
 			changeMember->name = changingValue;
 		}
-		if (changingIndex == "cl")
+		else if (changingIndex == "cl")
 		{
-			CL changeCl;
-			if (changingValue == "CL1") changeCl = CL::CL1;
-			if (changingValue == "CL2") changeCl = CL::CL2;
-			if (changingValue == "CL3") changeCl = CL::CL3;
-			if (changingValue == "CL4") changeCl = CL::CL4;
-			changeMember->cl = changeCl;
+			changeMember->cl = getCL(changingValue);
 		}
-		if (changingIndex == "phoneNum")
+		else if (changingIndex == "phoneNum")
 		{
 			changeMember->phoneNum = changingValue;
 		}
-		if (changingIndex == "birthday")
+		else if (changingIndex == "birthday")
 		{
 			changeMember->birthday = stoul(changingValue);
 		}
-		if (changingIndex == "certi")
+		else if (changingIndex == "certi")
 		{
-			CERTI changeCerti;
-			if (changingValue == "ADV") changeCerti = CERTI::ADV;
-			if (changingValue == "PRO") changeCerti = CERTI::PRO;
-			if (changingValue == "EX") changeCerti = CERTI::EX;
-			changeMember->certi = changeCerti;
+			changeMember->certi = getCELTI(changingValue);
 		}
 	}
 
