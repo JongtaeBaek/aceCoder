@@ -18,6 +18,21 @@ string ConvertCerti(CERTI certi)
 	if (certi == CERTI::EX) return "EX";
 }
 
+string ConvertID(int num) {
+	stringstream ss;
+
+	// the number is converted to string with the help of stringstream
+	ss << num;
+	string ret;
+	ss >> ret;
+
+	// Append zero chars
+	int str_length = ret.length();
+	for (int i = 0; i < 8 - str_length; i++)
+		ret = "0" + ret;
+	return ret;
+}
+
 bool CompareEmployeeNum(unsigned int a, unsigned int b)
 {
 	unsigned int a_year = a / 1000000, b_year = b / 1000000;
@@ -72,8 +87,8 @@ string PrintList(vector<member>& findingMembers)
 	string result;
 	for (auto member : findingMembers)
 	{
-		result += (member.employeeNum / 10000000) ? "MOD," : "MOD,0";
-		result += to_string(member.employeeNum);
+		result += "MOD,";
+		result += ConvertID(member.employeeNum);
 		result += "," + member.name;
 		result += "," + ConvertCl(member.cl);
 		result += "," + member.phoneNum;
