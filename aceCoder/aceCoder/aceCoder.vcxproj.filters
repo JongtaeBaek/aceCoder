@@ -42,5 +42,8 @@
     <Text Include="input\input_20_20.txt">
       <Filter>input</Filter>
     </Text>
+    <Text Include="input\output_20_20.txt">
+      <Filter>input</Filter>
+    </Text>
   </ItemGroup>
 </Project>
