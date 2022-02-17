@@ -20,7 +20,7 @@ int Add::run(const member& newmem) {
 	return 1;
 }
 
-string Add::run(const string& comand1line) {
+string Add::run_old(const string& comand1line) {
 	if (!parachecker_)
 		return string{ "[Error] Add Parameter Checker is nullptr!"};
 	vector<string> values = parachecker_->parse(comand1line);
@@ -35,7 +35,7 @@ string Add::run(const string& comand1line) {
 	return string{};
 }
 
-string Add::run_4sort(const string& comand1line) {
+string Add::run(const string& comand1line) {
 	if (!parachecker_)
 		return string{ "[Error] Add Parameter Checker is nullptr!" };
 	vector<string> values = parachecker_->parse(comand1line);

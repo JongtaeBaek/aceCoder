@@ -4,7 +4,7 @@
 #include "delete.h"
 #include "modifier.h"
 #include "Sch.h"
-#if 0
+
 static void print_help(void)
 {
 	cout << "Follow the form below" << endl;
@@ -32,23 +32,32 @@ int main(int argc, char **argv)
 	Sch* sch = new Sch(members);
 	string outputresult;
 
-	for (const auto& line : lines) {
-		const string value = para->getCMD(line);
-		if (value == "ADD")
+	int pos = 0;
+	for (int i = 0; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value != "ADD")
 		{
-			add->run(line);
+			pos = i;
+			break;
 		}
-		else if (value == "DEL")
+		add->run(lines[i]);
+	}
+	// sort
+	sort(members.begin(), members.end(), [](const member& e1, const member& e2) { return (e1.employeeNum < e2.employeeNum); });
+
+	for (int i = pos; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value == "DEL")
 		{
-			outputresult += del->run(line);
+			outputresult += del->run(lines[i]);
 		}
 		else if (value == "MOD")
 		{
-			outputresult += modifier->run(line);
+			outputresult += modifier->run(lines[i]);
 		}
 		else if (value == "SCH")
 		{
-			outputresult += sch->run(line);
+			outputresult += sch->run(lines[i]);
 		}
 	}
 
@@ -63,4 +72,3 @@ int main(int argc, char **argv)
 	delete modifier;
 	delete sch;
 }
-#endif
