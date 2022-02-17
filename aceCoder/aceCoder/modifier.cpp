@@ -241,14 +241,7 @@ string Modifier::Modify(vector<string> values)
 	}
 	else
 	{
-		if (findingMember.size() > 5)
-		{
-			result += "MOD,5\n";
-		}
-		else
-		{
-			result += "MOD," + to_string(findingMember.size()) + "\n";
-		}
+		result += "MOD," + to_string(findingMember.size()) + "\n";
 	}
 
 	if (changingIndex == "name")
