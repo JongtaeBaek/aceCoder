@@ -3,6 +3,7 @@
 #include"member.h"
 #include<sstream>
 #include<vector>
+#include "Command.h"
 using namespace std;
 
 #define MAXDATA		(100000)
@@ -28,14 +29,14 @@ using namespace std;
 //int Delete(vector<member>& members, string condition, string str, string opt1, string opt2);
 
 
-class Del {
+class Del : public Command {
 public:
 	Del(vector<member>& members);
 	virtual ~Del() = default;
 
 	int Delete(vector<member>& members, string condition, string str, string opt1, string opt2);
 	
-	string run(string cmd) {
+	string run(const string& cmd) override {
 		vector<string> arg;
 		arg.clear();
 		istringstream ss(cmd);

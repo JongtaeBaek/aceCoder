@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="Add.h" />
     <ClInclude Include="AddParmeterChecker.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="delete.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="modifier.h" />

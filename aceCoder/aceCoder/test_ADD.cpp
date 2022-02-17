@@ -58,8 +58,7 @@ TEST(ADD_TESTSUITE, TEST_SORT) {
 	vector<string>lines = para->loadTxt(".\\input\\inputAdd.txt");
 	ASSERT_NE(0, lines.size());
 
-	Add* add = new Add(members);
-	add->setParameterChecker(para);
+	Add* add = new Add(members, para);
 	string outputresult;
 
 	int pos = 0;
@@ -117,8 +116,7 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE3) {
 	ParameterChecker* para = new AddParmeterChecker();
 	vector<string>lines = para->loadTxt(".\\input\\input_20_20.txt");
 	ASSERT_NE(0, lines.size());
-	Add* add = new Add(members);
-	add->setParameterChecker(para);
+	Add* add = new Add(members, para);
 	for (const auto& line : lines) {
 		vector<string> values = para->parse(line);
 		if (values[IDXCMD] == "ADD")

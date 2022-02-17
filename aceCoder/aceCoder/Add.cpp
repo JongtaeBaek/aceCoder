@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Add.h"
 
-Add::Add(vector<member>& members) : members_(members),parachecker_ (nullptr){
+Add::Add(vector<member>& members, ParameterChecker* para) : members_(members),parachecker_ (para){
 }
 
 bool Add::isValid(const member& newmem) const {

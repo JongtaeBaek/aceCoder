@@ -204,8 +204,7 @@ TEST(DEL_TESTSUITE, TEST_PRINT) {
 	vector<string>lines = para->loadTxt(".\\input\\input_del.txt");
 	ASSERT_NE(0, lines.size());
 
-	Add* add = new Add(members);
-	add->setParameterChecker(para);
+	Add* add = new Add(members, para);
 	Del* del = new Del(members);
 	string outputresult;
 

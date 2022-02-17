@@ -26,6 +26,7 @@
     <ClInclude Include="Sch.h" />
     <ClInclude Include="AddParmeterChecker.h" />
     <ClInclude Include="SchParameterChecker.h" />
+    <ClInclude Include="Command.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
