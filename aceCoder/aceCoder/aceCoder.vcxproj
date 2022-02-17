@@ -51,7 +51,9 @@
     <ClCompile Include="AddParmeterChecker.cpp" />
     <ClCompile Include="delete.cpp" />
     <ClCompile Include="FactoryCommand.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="member.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="modify_test.cpp" />
