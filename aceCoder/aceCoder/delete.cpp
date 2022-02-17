@@ -3,6 +3,7 @@
 #include"delete.h"
 #include<stdio.h>
 #include<iostream>
+#include"add.h"
 
 static vector<member> big_five;
 char flag[MAXDATA] = { 0 , };
@@ -54,6 +55,7 @@ static int erase_start(vector<member>& gmembers, char* flag)
 
 static int compare_employeeNum(unsigned int a, unsigned int b)
 {
+	/*
 	unsigned int a_year = a / 1000000, b_year = b / 1000000;
 	unsigned int a_Num = a % 1000000, b_Num = b % 1000000;
 
@@ -70,18 +72,23 @@ static int compare_employeeNum(unsigned int a, unsigned int b)
 		return 1;
 
 	return 0;
+	*/
+
+	return a < b;
 }
+
+
 
 static void save_big_five_member(struct member a)
 {
 	int i = 0;
 	int size = big_five.size();
-
+	
 	if (big_five.empty()) {
 		big_five.push_back(a);
 		return;
 	}
-
+	/*
 	for (i = 0; i < size; i++) {
 		if (compare_employeeNum(a.employeeNum, big_five[i].employeeNum)) {//신입이 사번이 더 높다
 			big_five.emplace(big_five.begin() + i, a);
@@ -94,14 +101,18 @@ static void save_big_five_member(struct member a)
 
 	if (big_five.size() >= 6)
 		big_five.pop_back();
+	*/
+	if (big_five.size() < 5)
+		big_five.push_back(a);
 
 	return;
 }
 
 static int Delete_employeeNum(vector<member>& gmembers, string str, int option1, int option2)
 {
+	ParameterChecker* para = new AddParmeterChecker();
 	int sum = 0;
-	int cond = stoi(str);
+	int cond = para->getEmployeeNum(str);//stoi(str);
 
 	for (int i = 0; i < gmembers.size(); i++)
 	{
@@ -113,6 +124,7 @@ static int Delete_employeeNum(vector<member>& gmembers, string str, int option1,
 		}
 	}
 	erase_start(gmembers, flag);
+	delete para;
 	return sum;
 }
 
@@ -212,7 +224,7 @@ static int Delete_birthday(vector<member>& gmembers, string str, int option1, in
 {
 	int sum = 0;
 	int cond = stoi(str);
-
+	
 	for (int i = 0; i < gmembers.size(); i++)
 	{
 		unsigned int database_birthday;
@@ -305,8 +317,10 @@ static string convert_ID(int num) {
 
 static string print_info(struct member m)
 {
+	ParameterChecker* para = new AddParmeterChecker();
 	ostringstream oss;
-	oss << "DEL," << convert_ID(m.employeeNum) << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << "\n";
+	oss << "DEL," << para->getEmployeeNumString(m.employeeNum) << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << "\n";
+	delete para;
 	return oss.str();
 }
 

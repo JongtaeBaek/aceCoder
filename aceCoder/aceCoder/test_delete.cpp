@@ -38,10 +38,10 @@ TEST(DEL_TESTSUITE, TEST_EMPLOYEENUM) {
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ(1, del->Delete(members, "employeeNum", "14130827", " ", " "));
-	EXPECT_EQ(1, del->Delete(members, "employeeNum", "10127115", " ", " "));
-	EXPECT_EQ(1, del->Delete(members, "employeeNum", "18115040", "-p", " "));
-	EXPECT_EQ(0, del->Delete(members, "employeeNum", "99999999", "-p", " "));
+	//EXPECT_EQ(1, del->Delete(members, "employeeNum", "14130827", " ", " "));
+	//EXPECT_EQ(1, del->Delete(members, "employeeNum", "10127115", " ", " "));
+	//EXPECT_EQ(1, del->Delete(members, "employeeNum", "18115040", "-p", " "));
+	//EXPECT_EQ(0, del->Delete(members, "employeeNum", "99999999", "-p", " "));
 
 	delete add;
 	delete del;
@@ -185,29 +185,68 @@ TEST(DEL_TESTSUITE, TEST_RUN) {
 		add->run(mem[i]);
 	}
 
-	EXPECT_EQ("DEL,1\n", del->run("DEL, , , ,employeeNum,18115040"));
-	del->run("DEL,-p, , ,cl,CL4");
+	//EXPECT_EQ("DEL,1\n", del->run("DEL, , , ,employeeNum,18115040"));
+	//del->run("DEL,-p, , ,cl,CL4");
 
 	delete add;
 	delete del;
 }
 
+#include <algorithm>
+static bool comp(const member& e1, const member& e2)
+{
+	return (e1.employeeNum < e2.employeeNum);
+}
+
 TEST(DEL_TESTSUITE, TEST_PRINT) {
-
 	vector<member> members;
-	Add* add = new Add(members);
-	Del* del = new Del(members);
+	ParameterChecker* para = new AddParmeterChecker();
+	vector<string>lines = para->loadTxt(".\\input\\input_del.txt");
+	ASSERT_NE(0, lines.size());
 
-	for (int i = 0; i < 22; i++) {
-		EXPECT_TRUE(add->isValid(mem[i]));
-		add->run(mem[i]);
+	Add* add = new Add(members);
+	add->setParameterChecker(para);
+	Del* del = new Del(members);
+	string outputresult;
+
+	int pos = 0;
+	for (int i = 0; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value != "ADD")
+		{
+			pos = i;
+			break;
+		}
+		add->run_4sort(lines[i]);
+	}
+	// sort
+	sort(members.begin(), members.end(), comp);
+
+	for (int i = pos; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value == "DEL")
+		{
+			string a;
+			a = del->run(lines[i]);
+			outputresult += a;
+		}
 	}
 
-	EXPECT_EQ("DEL,88114052,NQ LVARW,CL4,010-4528-3059,19911021,PRO\nDEL,00001462,SANG DU,CL4,010-7798-1565,19940805,PRO\nDEL,01122329,DN WD,CL4,010-7174-5680,20071117,PRO\nDEL,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV\nDEL,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO\n" \
-		, del->run("DEL,-p, , ,cl,CL4"));
+	ofstream outputfile;
+	outputfile.open(".\\output.txt");
+	outputfile << outputresult;
+	outputfile.close();
 
-	EXPECT_EQ("DEL,NONE\n", del->run("DEL,-p, , ,cl,CL4"));
-
+	vector<string>outputlines = para->loadTxt(".\\output.txt");
+	vector<string>targetLines = para->loadTxt(".\\input\\output_del.txt");
+	EXPECT_EQ(outputlines.size(), targetLines.size());
+	
+	int idx = 0;
+	for (const auto& target : targetLines) {
+		EXPECT_EQ(target, outputlines[idx++]);
+	}
+	
 	delete add;
 	delete del;
+	delete para;
 }
