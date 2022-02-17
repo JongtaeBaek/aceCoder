@@ -4,13 +4,14 @@
 #include <sstream>
 #include "member.h"
 #include "SchParameterChecker.h"
+#include "Command.h"
 
-class Sch {
+class Sch : public Command {
 public:
 	Sch(vector<member>& members) : members_(members) {}
 	virtual ~Sch() = default;
 
-	string run(string cmd) {
+	string run(const string& cmd) override {
 		string ret = "";
 
 		ParameterChecker* schpara = new SchParameterChecker();

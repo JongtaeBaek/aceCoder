@@ -2,6 +2,7 @@
 #include <string>
 #include "member.h"
 #include "ParameterChecker.h"
+#include "Command.h"
 using namespace std;
 
 enum MODPARAINDEX {
@@ -15,12 +16,12 @@ enum MODPARAINDEX {
 	MODIDXCHANGEVALUE
 };
 
-class Modifier : public ParameterChecker
+class Modifier : public ParameterChecker , public Command
 {
 public:
 	Modifier(vector<member>& inputList);
 	~Modifier();
-	string run(const string& inputstring);
+	string run(const string& inputstring) override;
 	string Modify(vector<string> values);
 	string PrintList(vector<member>& findingMembers);
 private:

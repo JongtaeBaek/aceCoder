@@ -12,11 +12,10 @@ TEST(DB_TEST, SAMPLE_SORT_TEST) {
 	vector<string>lines = para->loadTxt(".\\input\\input_sort.txt");
 	ASSERT_NE(0, lines.size());
 
-	Add* add = new Add(members);
-	add->setParameterChecker(para);
-	Del* del = new Del(members);
-	Modifier* modifier = new Modifier(members);
-	Sch* sch = new Sch(members);
+	Command* add = new Add(members, para);
+	Command* del = new Del(members);
+	Command* modifier = new Modifier(members);
+	Command* sch = new Sch(members);
 	string outputresult;
 	
 	int pos = 0;
@@ -75,11 +74,10 @@ TEST(DB_TEST, SAMPLE_TEST_UPDATE) {
 	vector<string>lines = para->loadTxt(".\\input\\input_20_20.txt");
 	ASSERT_NE(0, lines.size());
 
-	Add* add = new Add(members);
-	add->setParameterChecker(para);
-	Del* del = new Del(members);
-	Modifier* modifier = new Modifier(members);
-	Sch* sch = new Sch(members);
+	Command* add = new Add(members, para);
+	Command* del = new Del(members);
+	Command* modifier = new Modifier(members);
+	Command* sch = new Sch(members);
 	string outputresult;
 
 	int pos = 0;

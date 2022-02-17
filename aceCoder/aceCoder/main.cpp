@@ -25,11 +25,10 @@ int main(int argc, char **argv)
 	if (lines.size() == 0)
 		return 	EXIT_FAILURE;
 
-	Add* add = new Add(members);
-	add->setParameterChecker(para);
-	Del* del = new Del(members);
-	Modifier* modifier = new Modifier(members);
-	Sch* sch = new Sch(members);
+	Command* add = new Add(members, para);
+	Command* del = new Del(members);
+	Command* modifier = new Modifier(members);
+	Command* sch = new Sch(members);
 	string outputresult;
 
 	int pos = 0;
