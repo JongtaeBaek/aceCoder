@@ -43,10 +43,6 @@ public:
 private:
 	vector<member>& members_;
 	int  search(string cmd, vector<member>& retmembers_, vector<member>& members_);
-	vector<string> split(string s, string divid);
 	string convert_CL(CL cl);
 	string convert_CERTI(CERTI cl);
-	string convert_ID(int num);
-	bool compare_ID(const member &A, const member &B);
-	void insert(vector<member>& members_, member member_);
 };
