@@ -939,6 +939,79 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithFirs
 	}
 }
 
+TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithManyZeroEmployeeNum) {
+	// given test member list
+	vector<member> testList;
+	member testMember;
+	testMember.employeeNum = 80345670;
+	testMember.name = "A A";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 5;
+	testMember.name = "A F";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 8345672;
+	testMember.name = "A C";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 74345671;
+	testMember.name = "A B";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 12345674;
+	testMember.name = "A E";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 12345673;
+	testMember.name = "A D";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	// when find name and change cl
+	Modifier* modifier = new Modifier(testList);
+	vector<string> cmdString;
+	cmdString.push_back("MOD");
+	cmdString.push_back("-p");
+	cmdString.push_back("-f");
+	cmdString.push_back(" ");
+	cmdString.push_back("name");
+	cmdString.push_back("A");
+	cmdString.push_back("cl");
+	cmdString.push_back("CL3");
+
+	// then modifier Modify return success(0) and cl changed
+	string resultStr = "MOD,74345671,A B,CL1,010-1234-5678,19990215,ADV\nMOD,80345670,A A,CL1,010-1234-5678,19990215,ADV\nMOD,00000005,A F,CL1,010-1234-5678,19990215,ADV\nMOD,08345672,A C,CL1,010-1234-5678,19990215,ADV\nMOD,12345673,A D,CL1,010-1234-5678,19990215,ADV\n";
+	EXPECT_TRUE(resultStr == modifier->Modify(cmdString));
+	for (auto member : testList)
+	{
+		EXPECT_EQ(CL::CL3, member.cl);
+	}
+}
+
 TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberCountOverFiveAndChangeClWithName) {
 	// given test member list
 	vector<member> testList;
