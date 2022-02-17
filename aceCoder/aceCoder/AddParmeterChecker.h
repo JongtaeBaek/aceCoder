@@ -48,7 +48,7 @@ private:
 	}
 
 	bool isCELTIValid(const string& str) {
-		if (str != "ADV" && str != "PRO" && str != "EXPERT")
+		if (str != "ADV" && str != "PRO" && str != "EX")
 			return false;
 		return true;
 	}

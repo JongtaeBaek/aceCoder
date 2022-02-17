@@ -19,6 +19,7 @@ string testinput[] = {
 	"SCH,-p, , ,employeeNum,10127115",
 	"SCH, ,-f, ,name,LDEXRI",
 	"SCH, , , ,name,FB NTAWR",
+	"SCH,-p, , ,certi,EX",
 };
 
 string testoutput[] = {
@@ -34,14 +35,30 @@ string testoutput[] = {
 	"SCH,NONE\n",
 	"SCH,10127115,KBU MHU,CL3,010-3284-4054,19660814,ADV\n",
 	"SCH,NONE\n",
-	"SCH,1\n"
-
+	"SCH,1\n",
+	"SCH,00000052,ABC DEF,CL2,010-1234-3655,19901017,EX\nSCH,00004052,ABC DEF,CL2,010-1234-3655,19901017,EX\nSCH,00104050,ABC DEF,CL2,010-1234-3655,19901017,EX\nSCH,00104052,ABC DEF,CL2,010-1234-3655,19901017,EX\nSCH,00104152,ABC DEF,CL2,010-1234-3655,19901017,EX\n",
 };
+
+TEST(SCH_TEST, SCH_PARAM_TEST) {
+	vector<member> members;
+	ParameterChecker* schpara = new SchParameterChecker();
+	vector<string>lines = schpara->loadTxt(".\\input\\input_search_test.txt");
+
+	for (const auto& line : lines) {
+		if (line.substr(0, 3) != "SCH") {
+			continue;
+		}
+		vector<string> values = schpara->parse(line);
+		ASSERT_TRUE(schpara->isValid(values));
+	}
+
+	delete schpara;
+}
 
 TEST(SCH_TEST, FUNC_TEST) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
-	vector<string>lines = para->loadTxt(".\\input\\inputAdd.txt");
+	vector<string>lines = para->loadTxt(".\\input\\inputSearch.txt");
 
 	Add* add = new Add(members);
 	for (const auto& line : lines) {
@@ -54,27 +71,11 @@ TEST(SCH_TEST, FUNC_TEST) {
 	
 	Sch* sch = new Sch(members);
 
-	for (int i = 0; i < 13; i++) {
+	for (int i = 0; i < 14; i++) {
 		ASSERT_EQ(testoutput[i], sch->run(testinput[i]));
 	}
 	
 	delete add;
 	delete para;
 	delete sch;
-}
-
-TEST(SCH_TEST, SCH_PARAM_TEST) {
-	vector<member> members;
-	ParameterChecker* schpara = new SchParameterChecker();
-	vector<string>lines = schpara->loadTxt(".\\input\\input_20_20.txt");
-
-	for (const auto& line : lines) {
-		if (line.substr(0, 3) != "SCH") {
-			continue;
-		}
-		vector<string> values = schpara->parse(line);
-		ASSERT_TRUE(schpara->isValid(values));
-	}
-
-	delete schpara;
 }
