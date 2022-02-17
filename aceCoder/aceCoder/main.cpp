@@ -19,6 +19,9 @@ int main(int argc, char **argv)
 
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
+	if (para == nullptr)
+		return 	EXIT_FAILURE;
+
 	vector<string>lines = para->loadTxt(argv[1]);
 
 	if (lines.size() == 0)
@@ -27,6 +30,9 @@ int main(int argc, char **argv)
 	vector<string> commands = { "ADD","DEL","MOD" ,"SCH" };
 	std::map<std::string, Command*> cmdmap;
 	IFactoryCommand* factory = new FactoryCommand();
+	if (factory == nullptr)
+		return 	EXIT_FAILURE;
+
 	for (const auto& cmd : commands) {
 		cmdmap.insert(make_pair(cmd, factory->createCommand(cmd, members, para)));
 	}
@@ -35,6 +41,9 @@ int main(int argc, char **argv)
 	if(cmdmap.find("ADD") == cmdmap.end())
 		return 	EXIT_FAILURE;
 	Command* add = cmdmap["ADD"];
+	if (add == nullptr)
+		return 	EXIT_FAILURE;
+
 	for (int i = 0; i < lines.size(); i++) {
 		const string value = para->getCMD(lines[i]);
 		if (value != "ADD"){
@@ -50,7 +59,7 @@ int main(int argc, char **argv)
 	for (int i = pos; i < lines.size(); i++) {
 		const string value = para->getCMD(lines[i]);
 		const auto item = cmdmap.find(value);
-		if (item == cmdmap.end())
+		if ((item == cmdmap.end()) || (item->second == nullptr))
 			return 	EXIT_FAILURE;
 		outputresult += item->second->run(lines[i]);
 	}

@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "member.h"
 #include "modifier.h"
-
+#include "ModParameterChecker.h"
 
 TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithEmptyListThenReturnMinusValue) {
 	// given empty list
 	vector<member> testList;
 
 	// when input empty list and Modify
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -37,7 +38,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongNameThenReturnMinusValue) 
 	testList.push_back(testMember);
 
 	// when input empty list and run
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -67,7 +69,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongEmployeeNumThenReturnMinus
 	testList.push_back(testMember);
 
 	// when input empty list and run
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -97,7 +100,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongCLThenReturnMinusValue) {
 	testList.push_back(testMember);
 
 	// when input empty list and run
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -127,7 +131,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongPhoneNumThenReturnMinusVal
 	testList.push_back(testMember);
 
 	// when input empty list and run
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -157,7 +162,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongBirthDayThenReturnMinusVal
 	testList.push_back(testMember);
 
 	// when input empty list and run
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -187,7 +193,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongCertiThenReturnMinusValue)
 	testList.push_back(testMember);
 
 	// when input empty list and run
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -216,7 +223,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithName) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -246,7 +254,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithEmployeeNum) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -276,7 +285,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithCL) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -306,7 +316,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithPhoneNum) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -336,7 +347,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBItrhDay) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -366,7 +378,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithCerti) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -396,7 +409,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithFirstNameOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -426,7 +440,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithLastNameOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -456,7 +471,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithMiddlePhoneNumOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -486,7 +502,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithLastPhoneNumOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -516,7 +533,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayYearOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -546,7 +564,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayMonthOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -576,7 +595,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayDayOption) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -607,7 +627,8 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToPrintDoNotFindMemberWithWrongCertiThenReturnM
 	testList.push_back(testMember);
 
 	// when input empty list and Modify
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -636,7 +657,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberInfoAndChangeClWithName) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -698,7 +720,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -772,7 +795,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -845,7 +869,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintCountMultiMemberInfoOverFiveAndChange
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back(" ");
@@ -921,7 +946,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveAndChang
 
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -995,7 +1021,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithFirs
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -1069,7 +1096,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithMany
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("-p");
@@ -1143,7 +1171,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberCountOverFiveAndChangeClWithNam
 	testList.push_back(testMember);
 
 	// when find name and change cl
-	Modifier* modifier = new Modifier(testList);
+	ModParameterChecker paramChecker;
+	Modifier* modifier = new Modifier(testList, &paramChecker);
 	vector<string> cmdString;
 	cmdString.push_back("MOD");
 	cmdString.push_back("");

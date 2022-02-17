@@ -40,6 +40,7 @@
     <ClInclude Include="FactoryCommand.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="modifier.h" />
+    <ClInclude Include="ModParameterChecker.h" />
     <ClInclude Include="ParameterChecker.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sch.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="member.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="modify_test.cpp" />
+    <ClCompile Include="ModParameterChecker.cpp" />
     <ClCompile Include="Sch.cpp" />
     <ClCompile Include="SchParameterChecker.cpp" />
     <ClCompile Include="test.cpp">
