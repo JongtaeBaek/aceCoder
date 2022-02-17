@@ -425,8 +425,6 @@ string Del::OutputReturn(string condition, string opt1, string opt2, int sum)
 
 	return_string = print_output(option1, sum);
 
-	cout << return_string;
-
 	return return_string;
 }
 
