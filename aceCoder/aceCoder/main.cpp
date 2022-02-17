@@ -4,7 +4,7 @@
 #include "delete.h"
 #include "modifier.h"
 #include "Sch.h"
-
+#if 0
 static void print_help(void)
 {
 	cout << "Follow the form below" << endl;
@@ -63,3 +63,4 @@ int main(int argc, char **argv)
 	delete modifier;
 	delete sch;
 }
+#endif

@@ -113,6 +113,12 @@ TEST(DB_TEST, SAMPLE_SORT_TEST) {
 	delete sch;
 }
 
+#include <algorithm>
+bool comp(const member& e1, const member& e2)
+{
+	return (e1.employeeNum < e2.employeeNum);
+}
+
 TEST(DB_TEST, SAMPLE_TEST_UPDATE) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
@@ -126,23 +132,32 @@ TEST(DB_TEST, SAMPLE_TEST_UPDATE) {
 	Sch* sch = new Sch(members);
 	string outputresult;
 
-	for (const auto& line : lines) {
-		const string value = para->getCMD(line);
-		if (value == "ADD")
+	int pos = 0;
+	for (int i = 0; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value != "ADD")
 		{
-			add->run(line);
+			pos = i;
+			break;
 		}
-		else if (value == "DEL")
+		add->run_4sort(lines[i]);
+	}
+	// sort
+	sort(members.begin(), members.end(), comp);
+
+	for (int i = pos; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value == "DEL")
 		{
-			outputresult += del->run(line);
+			outputresult += del->run(lines[i]);
 		}
 		else if (value == "MOD")
 		{
-			outputresult += modifier->run(line);
+			outputresult += modifier->run(lines[i]);
 		}
 		else if (value == "SCH")
 		{
-			outputresult += sch->run(line);
+			outputresult += sch->run(lines[i]);
 		}
 	}
 

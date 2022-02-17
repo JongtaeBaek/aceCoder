@@ -52,6 +52,45 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE) {
 	delete para;
 }
 
+#include <algorithm>
+bool comp2(const member& e1, const member& e2)
+{
+	return (e1.employeeNum < e2.employeeNum);
+}
+
+TEST(ADD_TESTSUITE, TEST_SORT) {
+	vector<member> members;
+	ParameterChecker* para = new AddParmeterChecker();
+	vector<string>lines = para->loadTxt(".\\input\\inputAdd.txt");
+	ASSERT_NE(0, lines.size());
+
+	Add* add = new Add(members);
+	add->setParameterChecker(para);
+	string outputresult;
+
+	int pos = 0;
+	for (int i = 0; i < lines.size(); i++) {
+		const string value = para->getCMD(lines[i]);
+		if (value != "ADD")
+		{
+			pos = i;
+			break;
+		}
+		add->run_4sort(lines[i]);
+	}
+
+	// sort
+	sort(members.begin(), members.end(), comp2);
+
+	for (auto m : members)
+	{
+		cout << m.employeeNum << "--->" << para->getEmployeeNumString(m.employeeNum) << endl;
+	}
+
+	delete add;
+	delete para;
+}
+
 TEST(ADD_TESTSUITE, TEST_INPUTFILE2) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();

@@ -11,6 +11,7 @@ public:
 	bool isValid(const member& newmem) const;
 	int run(const member& newmem);
 	string run(const string& comand1line);
+	string run_4sort(const string& comand1line);
 	void  setParameterChecker(ParameterChecker* parachecker) {
 		parachecker_ = parachecker;
 	}
