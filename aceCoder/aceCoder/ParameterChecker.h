@@ -47,9 +47,17 @@ public:
 			fPos = inputstring.find_first_not_of(delimeter, lPos);
 			lPos = inputstring.find_first_of(delimeter, fPos);
 		}
-		
 		return results;
-	}	
+	}
+
+	string getCMD(const string& inputstring, const string& delimeter = ",") const {
+		auto fPos = inputstring.find_first_not_of(delimeter, 0);
+		auto lPos = inputstring.find_first_of(delimeter, fPos);
+		if (string::npos != fPos || string::npos != lPos) {
+			return inputstring.substr(fPos, lPos - fPos);
+		}
+		return string{};
+	}
 
 	virtual bool isValid(const vector<string>& values)  {		
 		return false;
@@ -73,5 +81,41 @@ public:
 			return CERTI::PRO;
 
 		return CERTI::EX;
+	}
+
+	int getEmployeeNum(const string& str) const {
+		int orgnum = stoi(str);
+		string tmp = str.substr(0, 2);
+		const int num = stoi(tmp);
+
+		if (num >= 0 && num <= 21) // 2000 2021
+			orgnum += 2000000000;
+		else
+			orgnum += 1900000000;
+
+		return orgnum;
+	}
+
+	string getEmployeeNumString(int num) {
+		if (num < 2000000000)
+			num -= 1900000000;
+		else
+			num -= 2000000000;
+
+		std::stringstream strTmp;
+		strTmp << std::setw(8) << std::setfill('0') << num;
+
+		return strTmp.str();
+	}
+
+	member convert_4sort(vector<string>& values) const {
+		member result{ 0 };
+		result.employeeNum = getEmployeeNum(values[IDXEMPLOYEENUM]);
+		result.name = values[IDXNAME];
+		result.cl = getCL(values[IDXCL]);
+		result.phoneNum = values[IDXPHONENUM];
+		result.birthday = stoi(values[IDXBIRTHDAY]);
+		result.certi = getCELTI(values[IDXCERTI]);
+		return result;
 	}
 };

@@ -34,3 +34,18 @@ string Add::run(const string& comand1line) {
 	run(mem);
 	return string{};
 }
+
+string Add::run_4sort(const string& comand1line) {
+	if (!parachecker_)
+		return string{ "[Error] Add Parameter Checker is nullptr!" };
+	vector<string> values = parachecker_->parse(comand1line);
+	if (!parachecker_->isValid(values))
+		return string{ "[Error] ADD parameters are invaild!" };
+
+	const member mem = parachecker_->convert_4sort(values);
+	if (!isValid(mem))
+		return string{ "[Error] ADD parameters are invaild!" };
+
+	run(mem);
+	return string{};
+}

@@ -48,5 +48,11 @@
     <Text Include="input\inputSearch.txt">
       <Filter>input</Filter>
     </Text>
+    <Text Include="input\input_sort.txt">
+      <Filter>input</Filter>
+    </Text>
+    <Text Include="input\output_sort.txt">
+      <Filter>input</Filter>
+    </Text>
   </ItemGroup>
 </Project>
