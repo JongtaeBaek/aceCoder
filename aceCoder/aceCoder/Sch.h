@@ -29,7 +29,7 @@ public:
 
 		if (schpara->parse(cmd)[1] == "-p") {
 			for (auto& member : retmembers) {
-				ret += "SCH," + convert_ID(member.employeeNum) + "," + member.name + "," + convert_CL(member.cl) + "," + member.phoneNum + "," + to_string(member.birthday) + "," + convert_CERTI(member.certi) + "\n";
+				ret += "SCH," + schpara->getEmployeeNumString(member.employeeNum) + "," + member.name + "," + convert_CL(member.cl) + "," + member.phoneNum + "," + to_string(member.birthday) + "," + convert_CERTI(member.certi) + "\n";
 			}
 		}
 		else {

@@ -72,16 +72,18 @@ bool Sch::compare_ID(const member& A, const member& B) {
 }
 
 void Sch::insert(vector<member>& members_, member member_) {
-	for (int i = 0; i < members_.size();i++) {
-		if (compare_ID(member_, members_[i])) {
-			members_.insert(members_.begin() + i, member_);
-			if (members_.size() > 5) {
-				members_.pop_back();
-			}
-			return;
-		}
+	//for (int i = 0; i < members_.size();i++) {
+	//	if (compare_ID(member_, members_[i])) {
+	//		members_.insert(members_.begin() + i, member_);
+	//		if (members_.size() > 5) {
+	//			members_.pop_back();
+	//		}
+	//		return;
+	//	}
+	//}
+	if (members_.size() >= 5) {
+		return;
 	}
-
 	members_.push_back(member_);
 }
 
@@ -89,6 +91,7 @@ void Sch::insert(vector<member>& members_, member member_) {
 int Sch::search(string cmd, vector<member>& retmembers_, vector<member>& members_) {
 	int ret = 0;
 	vector <string> cmd_arr = split(cmd, ",");
+	ParameterChecker* schpara = new SchParameterChecker();
 
 	if (cmd_arr[4] == "name") {
 		if (cmd_arr[2] == "-f") {
@@ -207,7 +210,7 @@ int Sch::search(string cmd, vector<member>& retmembers_, vector<member>& members
 	}
 	else if (cmd_arr[4] == "employeeNum") {
 		for (auto member : members_) {
-			if (convert_ID(member.employeeNum) == cmd_arr[5]) {
+			if (schpara->getEmployeeNumString(member.employeeNum) == cmd_arr[5]) {
 				insert(retmembers_, member);
 				ret++;
 			}
