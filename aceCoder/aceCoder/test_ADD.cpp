@@ -52,12 +52,6 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE) {
 	delete para;
 }
 
-#include <algorithm>
-bool comp2(const member& e1, const member& e2)
-{
-	return (e1.employeeNum < e2.employeeNum);
-}
-
 TEST(ADD_TESTSUITE, TEST_SORT) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
@@ -76,11 +70,11 @@ TEST(ADD_TESTSUITE, TEST_SORT) {
 			pos = i;
 			break;
 		}
-		add->run_4sort(lines[i]);
+		add->run(lines[i]);
 	}
 
 	// sort
-	sort(members.begin(), members.end(), comp2);
+	sort(members.begin(), members.end(), [](const member& e1, const member& e2) { return (e1.employeeNum < e2.employeeNum); });
 
 	for (auto m : members)
 	{

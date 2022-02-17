@@ -217,7 +217,7 @@ TEST(DEL_TESTSUITE, TEST_PRINT) {
 			pos = i;
 			break;
 		}
-		add->run_4sort(lines[i]);
+		add->run(lines[i]);
 	}
 	// sort
 	sort(members.begin(), members.end(), comp);
