@@ -85,6 +85,8 @@
     <Text Include="input\input_20_20.txt" />
     <Text Include="input\output_sort.txt" />
     <Text Include="input\output_20_20.txt" />
+    <Text Include="input\TC1_input.txt" />
+    <Text Include="input\TC1_output.txt" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

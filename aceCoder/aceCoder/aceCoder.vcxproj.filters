@@ -55,5 +55,11 @@
     <Text Include="input\output_sort.txt">
       <Filter>input</Filter>
     </Text>
+    <Text Include="input\TC1_input.txt">
+      <Filter>input</Filter>
+    </Text>
+    <Text Include="input\TC1_output.txt">
+      <Filter>input</Filter>
+    </Text>
   </ItemGroup>
 </Project>
