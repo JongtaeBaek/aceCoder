@@ -20,8 +20,6 @@ public:
 		
 		vector <member> members = search(cmd, members_);
 		
-		Sort_member(members);
-		
 		if (members.empty()) {
 			ret = "SCH,NONE\n";
 			return ret;
@@ -51,5 +49,5 @@ private:
 	string convert_ID(int num);
 	bool compare_fifth_member(const member &A, const member &B);
 	bool compare_ID(const member &A, const member &B);
-	void Sort_member(vector <member> &members);
+	void insert(vector<member>& members_, member member_);
 };

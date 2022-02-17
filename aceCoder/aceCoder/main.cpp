@@ -61,4 +61,5 @@ int main(int argc, char **argv)
 	delete del;
 	delete para;
 	delete modifier;
+	delete sch;
 }
