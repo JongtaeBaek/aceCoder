@@ -13,7 +13,9 @@ Command* FactoryCommand::createCommand(const string& cmd, vector<member>& member
 		return new Del(members);
 	}
 	else if (cmd == "MOD") {
-		return new Modifier(members);
+		ParameterChecker* modParamChecker = new ModParameterChecker();
+		if (modParamChecker == nullptr) return nullptr;
+		return new Modifier(members, modParamChecker);
 	}
 	else if (cmd == "SCH") {
 		return new Sch(members);

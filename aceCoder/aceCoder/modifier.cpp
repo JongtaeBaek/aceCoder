@@ -3,282 +3,226 @@
 #include "member.h"
 #include "ParameterChecker.h"
 
-string ConvertCl(CL cl)
-{
-	if (cl == CL::CL1) return "CL1";
-	if (cl == CL::CL2) return "CL2";
-	if (cl == CL::CL3) return "CL3";
-	if (cl == CL::CL4) return "CL4";
-}
-
-string ConvertCerti(CERTI certi)
-{
-	if (certi == CERTI::ADV) return "ADV";
-	if (certi == CERTI::PRO) return "PRO";
-	if (certi == CERTI::EX) return "EX";
-}
-
-string ConvertID(int num) {
-	stringstream ss;
-
-	// the number is converted to string with the help of stringstream
-	ss << num;
-	string ret;
-	ss >> ret;
-
-	// Append zero chars
-	int str_length = ret.length();
-	for (int i = 0; i < 8 - str_length; i++)
-		ret = "0" + ret;
-	return ret;
-}
-
-void SaveSortMemberList(vector<member>& sortedList, member selectedMember)
-{
-	if (sortedList.size() >= 5) return;
-	
-	sortedList.push_back(selectedMember);
-}
-
-
-Modifier::Modifier(vector<member>& inputList) : memberList(inputList)
+Modifier::Modifier(vector<member>& inputList, ParameterChecker* paramChecker)
+	: memberList(inputList), paramChecker(paramChecker)
 {
 }
 
 Modifier::~Modifier()
 {
-
-}
-
-string Modifier::PrintList(vector<member>& findingMembers)
-{
-	string result;
-	for (auto member : findingMembers)
-	{
-		result += "MOD,";
-		result += getEmployeeNumString(member.employeeNum);
-		result += "," + member.name;
-		result += "," + ConvertCl(member.cl);
-		result += "," + member.phoneNum;
-		result += "," + to_string(member.birthday);
-		result += "," + ConvertCerti(member.certi) + "\n";
-	}
-	return result;
+	if (paramChecker != nullptr) delete paramChecker;
 }
 
 string Modifier::run(const string& inputstring)
 {
-	return Modify(parse(inputstring));
+	if (paramChecker == nullptr)
+	{
+		cout << "modifier init fail" << endl;
+		return "";
+	}
+	if (paramChecker->isValid(paramChecker->parse(inputstring)) == false) return "";
+	return Modify(paramChecker->parse(inputstring));
 }
 
 string Modifier::Modify(vector<string> values)
 {
 	string result = "";
-	string opt1 = values[MODPARAINDEX::MODIDXFIRSTOPT];
-	string opt2 = values[MODPARAINDEX::MODIDXSECONDOPT];
-	string opt3 = values[MODPARAINDEX::MODIDXTHIRDOPT];
-	string findingIndex = values[MODPARAINDEX::MODIDXSEARCHOPTION];
-	string findingValue = values[MODPARAINDEX::MODIDXSEARCHVALUE];
-	string changingIndex = values[MODPARAINDEX::MODIDXCHANGEOPTION];
-	string changingValue = values[MODPARAINDEX::MODIDXCHANGEVALUE];
-
-	bool printOpt = false;
-	bool firstName = false;
-	bool lastName = false;
-	bool middleNumber = false;
-	bool lastNumber = false;
-	bool yearCheck = false;
-	bool monthCheck = false;
-	bool dayCheck = false;
-
-	if (opt1 == "-p") printOpt = true;
-	if (opt2 == "-f")
-	{
-		firstName = true;
-	}
-	else if (opt2 == "-l")
-	{
-		lastName = true;
-		lastNumber = true;
-	}
-	else if (opt2 == "-m")
-	{
-		middleNumber = true;
-		firstName = true;
-		monthCheck = true;
-	}
-	else if (opt2 == "-y")
-	{
-		yearCheck = true;
-	}
-	else if (opt2 == "-d")
-	{
-		dayCheck = true;
-	}
-
-	if (opt3 != " ")
-	{
-		cout << "not supported option" << endl;
-	}
 
 	vector<vector<member>::iterator> findingMember;
-	vector<member> sortedMember;
-	vector<member>::iterator iter = memberList.begin();
-
-	if (findingIndex == "employeeNum")
-	{
-		for (; iter != memberList.end(); iter++)
-		{
-			if (iter->employeeNum == getEmployeeNum(findingValue))
-			{
-				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
-				findingMember.push_back(iter);
-			}
-		}
-	}
-	else if (findingIndex == "name")
-	{
-		string expectName = findingValue;
-
-		for (; iter != memberList.end(); iter++)
-		{
-			string verifyName = iter->name;
-			int positionOfBlank = verifyName.find(" ");
-			if (firstName == true)
-			{
-				verifyName = verifyName.substr(0, positionOfBlank);
-			}
-			else if (lastName == true)
-			{
-				verifyName = verifyName.substr(positionOfBlank + 1, verifyName.size() - positionOfBlank);
-			}
-			if (expectName == verifyName)
-			{
-				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
-				findingMember.push_back(iter);
-			}
-		}
-	}
-	else if (findingIndex == "cl")
-	{
-		CL expectCl = getCL(findingValue);
-		for (; iter != memberList.end(); iter++)
-		{
-			if (iter->cl == expectCl)
-			{
-				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
-				findingMember.push_back(iter);
-			}
-		}
-	}
-	else if (findingIndex == "phoneNum")
-	{
-		string expectPhoneNum = findingValue;
-		for (; iter != memberList.end(); iter++)
-		{
-			string verifyPhoneNum = iter->phoneNum;
-
-			if (middleNumber == true)
-			{
-				verifyPhoneNum = verifyPhoneNum.substr(4, 4);
-			}
-			else if (lastNumber == true)
-			{
-				verifyPhoneNum = verifyPhoneNum.substr(9, 4);
-			}
-			if (expectPhoneNum == verifyPhoneNum)
-			{
-				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
-				findingMember.push_back(iter);
-			}
-		}
-	}
-	else if (findingIndex == "birthday")
-	{
-		for (; iter != memberList.end(); iter++)
-		{
-			unsigned int savedbirthday = iter->birthday;
-			if (yearCheck == true)
-			{
-				savedbirthday = savedbirthday / 10000;
-			}
-			else if (monthCheck == true)
-			{
-				savedbirthday = (savedbirthday % 10000) / 100;
-			}
-			else if (dayCheck == true)
-			{
-				savedbirthday = savedbirthday % 100;
-			}
-			if (savedbirthday == stoul(findingValue))
-			{
-				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
-				findingMember.push_back(iter);
-			}
-		}
-	}
-	else if (findingIndex == "certi")
-	{
-		CERTI expectCerti = getCELTI(findingValue);
-		for (; iter != memberList.end(); iter++)
-		{
-			if (iter->certi == expectCerti)
-			{
-				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
-				findingMember.push_back(iter);
-			}
-		}
-	}
+	SearchMember(values, findingMember);
 
 	if (findingMember.empty() == true)
 	{
 		return "MOD,NONE\n";
 	}
 
-	if (printOpt == true)
+	result += GetSearchResult(values, findingMember);
+
+	ModifyRecord(values, findingMember);
+
+	return result;
+}
+
+void Modifier::SearchMember(const vector<string>& values, vector<vector<member>::iterator>& findingMember)
+{
+	vector<member>::iterator iter = memberList.begin();
+	string findingValue = values[MODPARAINDEX::MODIDXSEARCHVALUE];
+
+	if (values[MODPARAINDEX::MODIDXSEARCHOPTION] == "employeeNum")
 	{
-		result += PrintList(sortedMember);
+		for (; iter != memberList.end(); iter++)
+		{
+			if (iter->employeeNum == paramChecker->getEmployeeNum(findingValue))
+			{
+				findingMember.push_back(iter);
+			}
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXSEARCHOPTION] == "name")
+	{
+		for (; iter != memberList.end(); iter++)
+		{
+			if (findingValue == GetVerifyName(values, iter->name))
+			{
+				findingMember.push_back(iter);
+			}
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXSEARCHOPTION] == "cl")
+	{
+		for (; iter != memberList.end(); iter++)
+		{
+			if (iter->cl == paramChecker->getCL(findingValue))
+			{
+				findingMember.push_back(iter);
+			}
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXSEARCHOPTION] == "phoneNum")
+	{
+		for (; iter != memberList.end(); iter++)
+		{
+			if (findingValue == GetVerifyPhoneNum(values, iter->phoneNum))
+			{
+				findingMember.push_back(iter);
+			}
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXSEARCHOPTION] == "birthday")
+	{
+		for (; iter != memberList.end(); iter++)
+		{
+			if (stoul(findingValue) == GetVerifyBirthDay(values, iter->birthday))
+			{
+				findingMember.push_back(iter);
+			}
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXSEARCHOPTION] == "certi")
+	{
+		for (; iter != memberList.end(); iter++)
+		{
+			if (paramChecker->getCERTI(findingValue) == iter->certi)
+			{
+				findingMember.push_back(iter);
+			}
+		}
+	}
+}
+
+string Modifier::GetSearchResult(vector<string>& values, vector<vector<member>::iterator>& findingMembers)
+{
+	string result;
+	if (values[MODPARAINDEX::MODIDXOPT1] == "-p")
+	{
+		int printCount = 0;
+		for (auto member : findingMembers)
+		{
+			printCount++;
+			result += "MOD,";
+			result += paramChecker->getEmployeeNumString(member->employeeNum);
+			result += "," + member->name;
+			result += "," + paramChecker->getClString(member->cl);
+			result += "," + member->phoneNum;
+			result += "," + to_string(member->birthday);
+			result += "," + paramChecker->getCertiString(member->certi) + "\n";
+			if (printCount == 5) break;
+		}
 	}
 	else
 	{
-		result += "MOD," + to_string(findingMember.size()) + "\n";
+		result += "MOD," + to_string(findingMembers.size()) + "\n";
 	}
-
-	if (changingIndex == "name")
-	{
-		for (auto changeMember : findingMember)
-		{
-			changeMember->name = changingValue;
-		}
-	}
-	else if (changingIndex == "cl")
-	{
-		for (auto changeMember : findingMember)
-		{
-			changeMember->cl = getCL(changingValue);
-		}
-	}
-	else if (changingIndex == "phoneNum")
-	{
-		for (auto changeMember : findingMember)
-		{
-			changeMember->phoneNum = changingValue;
-		}
-	}
-	else if (changingIndex == "birthday")
-	{
-		for (auto changeMember : findingMember)
-		{
-			changeMember->birthday = stoul(changingValue);
-		}
-	}
-	else if (changingIndex == "certi")
-	{
-		for (auto changeMember : findingMember)
-		{
-			changeMember->certi = getCELTI(changingValue);
-		}
-	}
-
 	return result;
+}
+
+void Modifier::ModifyRecord(vector<string>& values, vector<vector<member>::iterator>& findingMembers)
+{
+	if (values[MODPARAINDEX::MODIDXCHANGEOPTION] == "name")
+	{
+		for (auto changeMember : findingMembers)
+		{
+			changeMember->name = values[MODPARAINDEX::MODIDXCHANGEVALUE];
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXCHANGEOPTION] == "cl")
+	{
+		for (auto changeMember : findingMembers)
+		{
+			changeMember->cl = paramChecker->getCL(values[MODPARAINDEX::MODIDXCHANGEVALUE]);
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXCHANGEOPTION] == "phoneNum")
+	{
+		for (auto changeMember : findingMembers)
+		{
+			changeMember->phoneNum = values[MODPARAINDEX::MODIDXCHANGEVALUE];
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXCHANGEOPTION] == "birthday")
+	{
+		for (auto changeMember : findingMembers)
+		{
+			changeMember->birthday = stoul(values[MODPARAINDEX::MODIDXCHANGEVALUE]);
+		}
+	}
+	else if (values[MODPARAINDEX::MODIDXCHANGEOPTION] == "certi")
+	{
+		for (auto changeMember : findingMembers)
+		{
+			changeMember->certi = paramChecker->getCERTI(values[MODPARAINDEX::MODIDXCHANGEVALUE]);
+		}
+	}
+}
+
+string Modifier::GetVerifyName(const vector<string>& values, const string& name)
+{
+	string verifyName = name;
+	int positionOfBlank = verifyName.find(" ");
+	if (values[MODPARAINDEX::MODIDXOPT2] == "-f")
+	{
+		verifyName = verifyName.substr(0, positionOfBlank);
+	}
+	else if (values[MODPARAINDEX::MODIDXOPT2] == "-l")
+	{
+		verifyName = verifyName.substr(positionOfBlank + 1, verifyName.size() - positionOfBlank);
+	}
+	return verifyName;
+}
+
+string Modifier::GetVerifyPhoneNum(const vector<string>& values, const string& phoneNum)
+{
+	string verifyPhoneNum = phoneNum;
+	static const int middleNumStartPos = 4;
+	static const int lastNumStartPos = 9;
+	static const int splitPhoneNumSize = 4;
+
+	if (values[MODPARAINDEX::MODIDXOPT2] == "-m")
+	{
+		verifyPhoneNum = verifyPhoneNum.substr(middleNumStartPos, splitPhoneNumSize);
+	}
+	else if (values[MODPARAINDEX::MODIDXOPT2] == "-l")
+	{
+		verifyPhoneNum = verifyPhoneNum.substr(lastNumStartPos, splitPhoneNumSize);
+	}
+
+	return verifyPhoneNum;
+}
+
+unsigned int Modifier::GetVerifyBirthDay(const vector<string>& values, const unsigned int& birthDay)
+{
+	unsigned int savedbirthday = birthDay;
+	if (values[MODPARAINDEX::MODIDXOPT2] == "-y")
+	{
+		savedbirthday = savedbirthday / 10000;
+	}
+	else if (values[MODPARAINDEX::MODIDXOPT2] == "-m")
+	{
+		savedbirthday = (savedbirthday % 10000) / 100;
+	}
+	else if (values[MODPARAINDEX::MODIDXOPT2] == "-d")
+	{
+		savedbirthday = savedbirthday % 100;
+	}
+	return savedbirthday;
 }

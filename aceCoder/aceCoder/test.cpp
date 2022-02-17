@@ -10,12 +10,13 @@
 TEST(DB_TEST, SAMPLE_SORT_TEST) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
+	ParameterChecker* modParamChecker = new ModParameterChecker();
 	vector<string>lines = para->loadTxt(".\\input\\input_sort.txt");
 	ASSERT_NE(0, lines.size());
 
 	Command* add = new Add(members, para);
 	Command* del = new Del(members);
-	Command* modifier = new Modifier(members);
+	Command* modifier = new Modifier(members, modParamChecker);
 	Command* sch = new Sch(members);
 	string outputresult;
 	
@@ -72,12 +73,13 @@ TEST(DB_TEST, SAMPLE_SORT_TEST) {
 TEST(DB_TEST, SAMPLE_TEST_UPDATE) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
+	ParameterChecker* modParamChecker = new ModParameterChecker();
 	vector<string>lines = para->loadTxt(".\\input\\input_20_20.txt");
 	ASSERT_NE(0, lines.size());
 
 	Command* add = new Add(members, para);
 	Command* del = new Del(members);
-	Command* modifier = new Modifier(members);
+	Command* modifier = new Modifier(members, modParamChecker);
 	Command* sch = new Sch(members);
 	string outputresult;
 

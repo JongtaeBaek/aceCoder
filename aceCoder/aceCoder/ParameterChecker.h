@@ -22,7 +22,7 @@ public:
 		result.cl = getCL(values[IDXCL]);
 		result.phoneNum = values[IDXPHONENUM];
 		result.birthday = stoi(values[IDXBIRTHDAY]);
-		result.certi = getCELTI(values[IDXCERTI]);
+		result.certi = getCERTI(values[IDXCERTI]);
 		return result;
 	}
 
@@ -74,7 +74,7 @@ public:
 		return CL::CL4;
 	}
 
-	CERTI getCELTI(string& str) const {
+	CERTI getCERTI(string& str) const {
 		if (str == "ADV")
 			return CERTI::ADV;
 		else if (str == "PRO")
@@ -108,6 +108,22 @@ public:
 		return strTmp.str();
 	}
 
+
+	string getClString(CL cl)
+	{
+		if (cl == CL::CL1) return "CL1";
+		if (cl == CL::CL2) return "CL2";
+		if (cl == CL::CL3) return "CL3";
+		if (cl == CL::CL4) return "CL4";
+	}
+
+	string getCertiString(CERTI certi)
+	{
+		if (certi == CERTI::ADV) return "ADV";
+		if (certi == CERTI::PRO) return "PRO";
+		if (certi == CERTI::EX) return "EX";
+	}
+
 	member convert_4sort(vector<string>& values) const {
 		member result{ 0 };
 		result.employeeNum = getEmployeeNum(values[IDXEMPLOYEENUM]);
@@ -115,7 +131,7 @@ public:
 		result.cl = getCL(values[IDXCL]);
 		result.phoneNum = values[IDXPHONENUM];
 		result.birthday = stoi(values[IDXBIRTHDAY]);
-		result.certi = getCELTI(values[IDXCERTI]);
+		result.certi = getCERTI(values[IDXCERTI]);
 		return result;
 	}
 };

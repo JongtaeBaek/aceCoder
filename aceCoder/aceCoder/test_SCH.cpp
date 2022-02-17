@@ -6,6 +6,7 @@
 #include "delete.h"
 #include "SchParameterChecker.h"
 #include "ADDParmeterChecker.h"
+#include "ModParameterChecker.h"
 
 TEST(SCH_TEST, SCH_PARAM_TEST) {
 	vector<member> members;
@@ -26,12 +27,13 @@ TEST(SCH_TEST, SCH_PARAM_TEST) {
 TEST(SCH_TEST, FUNC_TEST) {
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
+	ParameterChecker* modParamChecker = new ModParameterChecker();
 	vector<string>lines = para->loadTxt(".\\input\\TC1_input.txt");
 	ASSERT_NE(0, lines.size());
 
 	Command* add = new Add(members, para);
 	Command* del = new Del(members);
-	Command* modifier = new Modifier(members);
+	Command* modifier = new Modifier(members, modParamChecker);
 	Command* sch = new Sch(members);
 	string outputresult;
 
