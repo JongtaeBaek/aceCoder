@@ -29,11 +29,12 @@ public:
 	vector<string> loadTxt(const string& filename) const {
 		vector<string> results;
 		std::ifstream input(filename);
-		for (std::string line; getline(input, line); )
-		{
-			results.emplace_back(line);
+		if(input.is_open()){
+			for (std::string line; getline(input, line); )
+			{
+				results.emplace_back(line);
+			}
 		}
-
 		return results;
 	}
 
