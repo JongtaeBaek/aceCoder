@@ -5,11 +5,23 @@
 #include "modifier.h"
 #include "Sch.h"
 
-int main()
+static void print_help(void)
+{
+	cout << "Follow the form below" << endl;
+	cout << "aceCoder.exe \"input.txt\" \"output.txt\"" << endl;
+}
+
+int main(int argc, char **argv)
 {	
+	if (argc != 3) {
+		print_help();
+		return EXIT_FAILURE;
+	}
+
 	vector<member> members;
 	ParameterChecker* para = new AddParmeterChecker();
-	vector<string>lines = para->loadTxt(".\\input\\input_20_20.txt");
+	vector<string>lines = para->loadTxt(argv[1]);
+
 	if (lines.size() == 0)
 		return 	EXIT_FAILURE;
 
@@ -41,7 +53,7 @@ int main()
 	}
 
 	ofstream outputfile;
-	outputfile.open(".\\output.txt");
+	outputfile.open(argv[2]);
 	outputfile << outputresult;
 	outputfile.close();
 
