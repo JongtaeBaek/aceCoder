@@ -59,21 +59,16 @@ bool Sch::compare_ID(const member& A, const member& B) {
 	return A_id_year < B_id_year;
 }
 
-void Sch::Sort_member(vector <member> &members) {
-	if (members.size() <= 1) {
-		return;
-	}
-	for (int i = 0; i < members.size() - 1; i++) {
-		for (int j = i + 1; j < members.size(); j++) {
-			if (!compare_ID(members[i], members[j])) {
-				member tmp = members[j];
-				members[j] = members[i];
-				members[i] = tmp;
-			}
+void Sch::insert(vector<member>& members_, member member_) {
+	for (int i = 0; i < members_.size();i++) {
+		if (compare_ID(member_, members_[i])) {
+			members_.insert(members_.begin() + i, member_);
+			return;
 		}
 	}
-}
 
+	members_.push_back(member_);
+}
 
 
 vector<member>  Sch::search(string cmd, vector<member>& members_) {
@@ -86,7 +81,7 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 			for (auto member : members_) {
 				vector <string> name_arr = split(member.name, " ");
 				if (name_arr[0] == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 						
 				}
 			}
@@ -95,14 +90,14 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 			for (auto member : members_) {
 				vector <string> name_arr = split(member.name, " ");
 				if (name_arr[1] == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
 		else if (cmd_arr[2] == " ") {
 			for (auto member : members_) {
 				if (member.name == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
@@ -113,7 +108,7 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 	else if (cmd_arr[4] == "cl") {
 		for (auto member : members_) {
 			if (convert_CL(member.cl) == cmd_arr[5]) {
-				ret.push_back(member);
+				insert(ret, member);
 			}
 		}
 	}
@@ -122,7 +117,7 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 			for (auto member : members_) {
 				vector <string> phonenum_arr = split(member.phoneNum, "-");
 				if (phonenum_arr[1] == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
@@ -130,14 +125,14 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 			for (auto member : members_) {
 				vector <string> phonenum_arr = split(member.phoneNum, "-");
 				if (phonenum_arr[2] == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
 		else if (cmd_arr[2] == " ") {
 			for (auto member : members_) {
 				if (member.phoneNum == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
@@ -149,28 +144,28 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 		if (cmd_arr[2] == "-y") {
 			for (auto member : members_) {
 				if (to_string(member.birthday).substr(0, 4) == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
 		else if (cmd_arr[2] == "-m") {
 			for (auto member : members_) {
 				if (to_string(member.birthday).substr(4, 2) == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
 		else if (cmd_arr[2] == "-d") {
 			for (auto member : members_) {
 				if (to_string(member.birthday).substr(6, 2) == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
 		else if (cmd_arr[2] == " ") {
 			for (auto member : members_) {
 				if (to_string(member.birthday) == cmd_arr[5]) {
-					ret.push_back(member);
+					insert(ret, member);
 				}
 			}
 		}
@@ -181,14 +176,14 @@ vector<member>  Sch::search(string cmd, vector<member>& members_) {
 	else if (cmd_arr[4] == "certi") {
 		for (auto member : members_) {
 			if (convert_CERTI(member.certi) == cmd_arr[5]) {
-				ret.push_back(member);
+				insert(ret, member);
 			}
 		}
 	}
 	else if (cmd_arr[4] == "employeeNum") {
 		for (auto member : members_) {
 			if (convert_ID(member.employeeNum) == cmd_arr[5]) {
-				ret.push_back(member);
+				insert(ret, member);
 			}
 		}
 	}
