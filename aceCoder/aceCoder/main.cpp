@@ -1,9 +1,8 @@
 #include <iostream>
+#include <algorithm>
 #include "pch.h"
-#include "Add.h"
-#include "delete.h"
-#include "modifier.h"
-#include "Sch.h"
+#include "FactoryCommand.h"
+#include "AddParmeterChecker.h"
 
 static void print_help(void)
 {
@@ -25,39 +24,35 @@ int main(int argc, char **argv)
 	if (lines.size() == 0)
 		return 	EXIT_FAILURE;
 
-	Command* add = new Add(members, para);
-	Command* del = new Del(members);
-	Command* modifier = new Modifier(members);
-	Command* sch = new Sch(members);
-	string outputresult;
+	vector<string> commands = { "ADD","DEL","MOD" ,"SCH" };
+	std::map<std::string, Command*> cmdmap;
+	IFactoryCommand* factory = new FactoryCommand();
+	for (const auto& cmd : commands) {
+		cmdmap.insert(make_pair(cmd, factory->createCommand(cmd, members, para)));
+	}
 
 	int pos = 0;
+	if(cmdmap.find("ADD") == cmdmap.end())
+		return 	EXIT_FAILURE;
+	Command* add = cmdmap["ADD"];
 	for (int i = 0; i < lines.size(); i++) {
 		const string value = para->getCMD(lines[i]);
-		if (value != "ADD")
-		{
+		if (value != "ADD"){
 			pos = i;
 			break;
 		}
 		add->run(lines[i]);
 	}
-	// sort
+
 	sort(members.begin(), members.end(), [](const member& e1, const member& e2) { return (e1.employeeNum < e2.employeeNum); });
 
+	string outputresult;
 	for (int i = pos; i < lines.size(); i++) {
 		const string value = para->getCMD(lines[i]);
-		if (value == "DEL")
-		{
-			outputresult += del->run(lines[i]);
-		}
-		else if (value == "MOD")
-		{
-			outputresult += modifier->run(lines[i]);
-		}
-		else if (value == "SCH")
-		{
-			outputresult += sch->run(lines[i]);
-		}
+		const auto item = cmdmap.find(value);
+		if (item == cmdmap.end())
+			return 	EXIT_FAILURE;
+		outputresult += item->second->run(lines[i]);
 	}
 
 	ofstream outputfile;
@@ -65,9 +60,5 @@ int main(int argc, char **argv)
 	outputfile << outputresult;
 	outputfile.close();
 
-	delete add;
-	delete del;
 	delete para;
-	delete modifier;
-	delete sch;
 }
