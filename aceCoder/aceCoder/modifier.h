@@ -22,6 +22,7 @@ public:
 	~Modifier();
 	string run(const string& inputstring);
 	string Modify(vector<string> values);
+	string PrintList(vector<member>& findingMembers);
 private:
 	vector<member>& memberList;
 };

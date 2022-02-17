@@ -33,70 +33,13 @@ string ConvertID(int num) {
 	return ret;
 }
 
-bool CompareEmployeeNum(unsigned int a, unsigned int b)
-{
-	unsigned int a_year = a / 1000000, b_year = b / 1000000;
-	unsigned int a_Num = a % 1000000, b_Num = b % 1000000;
-
-	a_year = (a_year <= 21) ? a_year + 100 : a_year;
-	b_year = (b_year <= 21) ? b_year + 100 : b_year;
-
-	if (a_year < b_year)
-		return true;
-
-	else if (a_year > b_year)
-		return false;
-
-	if (a_Num < b_Num)
-		return true;
-
-	return false;
-}
-
 void SaveSortMemberList(vector<member>& sortedList, member selectedMember)
 {
-	if (sortedList.empty())
-	{
-		sortedList.push_back(selectedMember);
-		return;
-	}
-	unsigned int lastEmployeeNum = sortedList.back().employeeNum;
-	unsigned int selectedEmployeeNum = selectedMember.employeeNum;
-
-	if ((sortedList.size() < 5) || (CompareEmployeeNum(selectedEmployeeNum, lastEmployeeNum)))
-	{
-		int i = 0;
-		for (; i < sortedList.size(); i++)
-		{
-			lastEmployeeNum = sortedList[i].employeeNum;
-			if (CompareEmployeeNum(selectedEmployeeNum, lastEmployeeNum))
-			{
-				sortedList.insert(sortedList.begin() + i, selectedMember);
-				break;
-			}
-		}
-		if (i == sortedList.size()) sortedList.push_back(selectedMember);
-	}
-
-	if (sortedList.size() > 5) sortedList.pop_back();
-
+	if (sortedList.size() >= 5) return;
+	
+	sortedList.push_back(selectedMember);
 }
 
-string PrintList(vector<member>& findingMembers)
-{
-	string result;
-	for (auto member : findingMembers)
-	{
-		result += "MOD,";
-		result += ConvertID(member.employeeNum);
-		result += "," + member.name;
-		result += "," + ConvertCl(member.cl);
-		result += "," + member.phoneNum;
-		result += "," + to_string(member.birthday);
-		result += "," + ConvertCerti(member.certi) + "\n";
-	}
-	return result;
-}
 
 Modifier::Modifier(vector<member>& inputList) : memberList(inputList)
 {
@@ -106,6 +49,23 @@ Modifier::~Modifier()
 {
 
 }
+
+string Modifier::PrintList(vector<member>& findingMembers)
+{
+	string result;
+	for (auto member : findingMembers)
+	{
+		result += "MOD,";
+		result += getEmployeeNumString(member.employeeNum);
+		result += "," + member.name;
+		result += "," + ConvertCl(member.cl);
+		result += "," + member.phoneNum;
+		result += "," + to_string(member.birthday);
+		result += "," + ConvertCerti(member.certi) + "\n";
+	}
+	return result;
+}
+
 string Modifier::run(const string& inputstring)
 {
 	return Modify(parse(inputstring));
@@ -169,7 +129,7 @@ string Modifier::Modify(vector<string> values)
 	{
 		for (; iter != memberList.end(); iter++)
 		{
-			if (iter->employeeNum == stoul(findingValue))
+			if (iter->employeeNum == getEmployeeNum(findingValue))
 			{
 				if (printOpt == true) SaveSortMemberList(sortedMember, *iter);
 				findingMember.push_back(iter);
@@ -327,5 +287,6 @@ string Modifier::Modify(vector<string> values)
 		}
 	}
 
+	cout << result;
 	return result;
 }

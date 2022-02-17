@@ -28,7 +28,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongNameThenReturnMinusValue) 
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -58,7 +58,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongEmployeeNumThenReturnMinus
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -88,7 +88,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongCLThenReturnMinusValue) {
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -118,7 +118,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongPhoneNumThenReturnMinusVal
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -148,7 +148,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongBirthDayThenReturnMinusVal
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -178,7 +178,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToFindMemberWithWrongCertiThenReturnMinusValue)
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -207,7 +207,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithName) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -237,7 +237,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithEmployeeNum) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -267,7 +267,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithCL) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -297,7 +297,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithPhoneNum) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -327,7 +327,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBItrhDay) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -357,7 +357,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithCerti) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -387,7 +387,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithFirstNameOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -417,7 +417,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithLastNameOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -447,7 +447,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithMiddlePhoneNumOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -477,7 +477,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithLastPhoneNumOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -507,7 +507,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayYearOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -537,7 +537,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayMonthOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -567,7 +567,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToChangeMemberCLWithBirthDayDayOption) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -598,7 +598,7 @@ TEST(MODIFY_TEST_SUITE, TEST_FailToPrintDoNotFindMemberWithWrongCertiThenReturnM
 	// given empty list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -627,7 +627,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberInfoAndChangeClWithName) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345678;
+	testMember.employeeNum = 2012345678;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -657,7 +657,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345670;
+	testMember.employeeNum = 2012345670;
 	testMember.name = "A A";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -665,7 +665,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345671;
+	testMember.employeeNum = 2012345671;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -673,7 +673,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345672;
+	testMember.employeeNum = 2012345672;
 	testMember.name = "A C";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -681,7 +681,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345673;
+	testMember.employeeNum = 2012345673;
 	testMember.name = "A D";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -689,7 +689,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoAndChangeClWithName) {
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345674;
+	testMember.employeeNum = 2012345674;
 	testMember.name = "A E";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -723,7 +723,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 12345670;
+	testMember.employeeNum = 2012345670;
 	testMember.name = "A A";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -731,7 +731,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345671;
+	testMember.employeeNum = 2012345671;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -739,7 +739,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345672;
+	testMember.employeeNum = 2012345672;
 	testMember.name = "A C";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -747,7 +747,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345673;
+	testMember.employeeNum = 2012345673;
 	testMember.name = "A D";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -755,7 +755,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345674;
+	testMember.employeeNum = 2012345674;
 	testMember.name = "A E";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -763,7 +763,7 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMultiMemberInfoOverFiveAndChangeClWit
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345675;
+	testMember.employeeNum = 2012345675;
 	testMember.name = "A F";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -797,31 +797,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveAndChang
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 80345670;
-	testMember.name = "A A";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
 
-	testMember.employeeNum = 90345675;
-	testMember.name = "A F";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 12345672;
-	testMember.name = "A C";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-	
-	testMember.employeeNum = 74345671;
+	testMember.employeeNum = 1974345671;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -829,7 +806,39 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveAndChang
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345674;
+	testMember.employeeNum = 1980345670;
+	testMember.name = "A A";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 1990345675;
+	testMember.name = "A F";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345672;
+	testMember.name = "A C";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345673;
+	testMember.name = "A D";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345674;
 	testMember.name = "A E";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -837,13 +846,6 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveAndChang
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345673;
-	testMember.name = "A D";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
 
 	// when find name and change cl
 	Modifier* modifier = new Modifier(testList);
@@ -870,31 +872,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithFirs
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 80345670;
-	testMember.name = "A A";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
 
-	testMember.employeeNum = 90345675;
-	testMember.name = "A F";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 8345672;
-	testMember.name = "A C";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 74345671;
+	testMember.employeeNum = 1974345671;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -902,16 +881,40 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithFirs
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345674;
-	testMember.name = "A E";
+	testMember.employeeNum = 1980345670;
+	testMember.name = "A A";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
 	testMember.birthday = 19990215;
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345673;
+	testMember.employeeNum = 1990345675;
+	testMember.name = "A F";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2008345672;
+	testMember.name = "A C";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345673;
 	testMember.name = "A D";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345674;
+	testMember.name = "A E";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
 	testMember.birthday = 19990215;
@@ -943,31 +946,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithMany
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 80345670;
-	testMember.name = "A A";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
 
-	testMember.employeeNum = 5;
-	testMember.name = "A F";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 8345672;
-	testMember.name = "A C";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 74345671;
+	testMember.employeeNum = 1974345671;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -975,16 +955,40 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintSortedMultiMemberInfoOverFiveWithMany
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345674;
-	testMember.name = "A E";
+	testMember.employeeNum = 1980345670;
+	testMember.name = "A A";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
 	testMember.birthday = 19990215;
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345673;
+	testMember.employeeNum = 2000000005;
+	testMember.name = "A F";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2008345672;
+	testMember.name = "A C";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345673;
 	testMember.name = "A D";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345674;
+	testMember.name = "A E";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
 	testMember.birthday = 19990215;
@@ -1016,31 +1020,8 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberCountOverFiveAndChangeClWithNam
 	// given test member list
 	vector<member> testList;
 	member testMember;
-	testMember.employeeNum = 80345670;
-	testMember.name = "A A";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
 
-	testMember.employeeNum = 90345675;
-	testMember.name = "A F";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 12345672;
-	testMember.name = "A C";
-	testMember.cl = CL::CL1;
-	testMember.phoneNum = "010-1234-5678";
-	testMember.birthday = 19990215;
-	testMember.certi = CERTI::ADV;
-	testList.push_back(testMember);
-
-	testMember.employeeNum = 74345671;
+	testMember.employeeNum = 1974345671;
 	testMember.name = "A B";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
@@ -1048,16 +1029,40 @@ TEST(MODIFY_TEST_SUITE, TEST_SuccessToPrintMemberCountOverFiveAndChangeClWithNam
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345674;
-	testMember.name = "A E";
+	testMember.employeeNum = 1980345670;
+	testMember.name = "A A";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
 	testMember.birthday = 19990215;
 	testMember.certi = CERTI::ADV;
 	testList.push_back(testMember);
 
-	testMember.employeeNum = 12345673;
+	testMember.employeeNum = 1990345675;
+	testMember.name = "A F";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345672;
+	testMember.name = "A C";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345673;
 	testMember.name = "A D";
+	testMember.cl = CL::CL1;
+	testMember.phoneNum = "010-1234-5678";
+	testMember.birthday = 19990215;
+	testMember.certi = CERTI::ADV;
+	testList.push_back(testMember);
+
+	testMember.employeeNum = 2012345674;
+	testMember.name = "A E";
 	testMember.cl = CL::CL1;
 	testMember.phoneNum = "010-1234-5678";
 	testMember.birthday = 19990215;
