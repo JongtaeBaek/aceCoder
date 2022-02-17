@@ -287,6 +287,5 @@ string Modifier::Modify(vector<string> values)
 		}
 	}
 
-	cout << result;
 	return result;
 }
