@@ -2,7 +2,7 @@
 #include"delete.h"
 #include"Add.h"
 
-member mem[20] = {
+member mem[22] = {
 	{ 15123099, string{ "VXIHXOTH JHOP" }, CL::CL3, string{ "010-3112-2609" }, 19771211, CERTI::ADV },
 	{ 17112609, string{ "FB NTAWR" }, CL::CL4, string{ "010-5645-6122" }, 19861203, CERTI::PRO },
 	{ 18115040, string{ "TTETHU HBO" }, CL::CL3, string{ "010-4581-2050" }, 20080718, CERTI::ADV },
@@ -23,12 +23,13 @@ member mem[20] = {
 	{ 11125777, string{ "TKOQKIS HC" }, CL::CL1, string{ "010-6734-2289" }, 19991001, CERTI::PRO },
 	{ 11109136, string{ "QKAHCEX LTODDO" }, CL::CL4, string{ "010-2627-8566" }, 19640130, CERTI::PRO },
 	{ 5101762, string{ "VCUHLE HMU" }, CL::CL4, string{ "010-3988-9289" }, 20030819, CERTI::PRO },
+	{ 5111762, string{ "SANG GU" }, CL::CL4, string{ "010-7777-9212" }, 19940819, CERTI::PRO },
+	{ 1462, string{ "SANG DU" }, CL::CL4, string{ "010-7798-1565" }, 19940805, CERTI::PRO },
 };
 
 TEST(DEL_TESTSUITE, TEST_EMPLOYEENUM) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 
@@ -49,7 +50,6 @@ TEST(DEL_TESTSUITE, TEST_EMPLOYEENUM) {
 TEST(DEL_TESTSUITE, TEST_NAME) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 
@@ -70,7 +70,6 @@ TEST(DEL_TESTSUITE, TEST_NAME) {
 TEST(DEL_TESTSUITE, TEST_NAME_FL) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 
@@ -91,7 +90,6 @@ TEST(DEL_TESTSUITE, TEST_NAME_FL) {
 TEST(DEL_TESTSUITE, TEST_CL) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 	
@@ -113,7 +111,6 @@ TEST(DEL_TESTSUITE, TEST_CL) {
 TEST(DEL_TESTSUITE, TEST_PHONENUM) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 
@@ -136,7 +133,6 @@ TEST(DEL_TESTSUITE, TEST_PHONENUM) {
 TEST(DEL_TESTSUITE, TEST_BIRTHDAY) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 
@@ -160,7 +156,6 @@ TEST(DEL_TESTSUITE, TEST_BIRTHDAY) {
 TEST(DEL_TESTSUITE, TEST_CERTI) {
 
 	vector<member> members;
-	string str = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO";
 	Add* add = new Add(members);
 	Del* del = new Del(members);
 
@@ -192,6 +187,26 @@ TEST(DEL_TESTSUITE, TEST_RUN) {
 
 	EXPECT_EQ("DEL,1\n", del->run("DEL, , , ,employeeNum,18115040"));
 	del->run("DEL,-p, , ,cl,CL4");
+
+	delete add;
+	delete del;
+}
+
+TEST(DEL_TESTSUITE, TEST_PRINT) {
+
+	vector<member> members;
+	Add* add = new Add(members);
+	Del* del = new Del(members);
+
+	for (int i = 0; i < 22; i++) {
+		EXPECT_TRUE(add->isValid(mem[i]));
+		add->run(mem[i]);
+	}
+
+	EXPECT_EQ("DEL,88114052,NQ LVARW,CL4,010-4528-3059,19911021,PRO\nDEL,00001462,SANG DU,CL4,010-7798-1565,19940805,PRO\nDEL,01122329,DN WD,CL4,010-7174-5680,20071117,PRO\nDEL,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV\nDEL,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO\n" \
+		, del->run("DEL,-p, , ,cl,CL4"));
+
+	EXPECT_EQ("DEL,NONE\n", del->run("DEL,-p, , ,cl,CL4"));
 
 	delete add;
 	delete del;

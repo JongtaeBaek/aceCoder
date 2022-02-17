@@ -108,7 +108,8 @@ static int Delete_employeeNum(vector<member>& gmembers, string str, int option1,
 		if (cond == gmembers[i].employeeNum) {
 			flag[i] = 1;
 			sum++;
-			save_big_five_member(gmembers[i]);
+			if(option1 == PRINT_ON)
+				save_big_five_member(gmembers[i]);
 		}
 	}
 	erase_start(gmembers, flag);
@@ -139,7 +140,8 @@ static int Delete_name(vector<member>& gmembers, string str, int option1, int op
 		if (!str.compare(database_name)) {
 			flag[i] = 1;
 			sum++;
-			save_big_five_member(gmembers[i]);
+			if (option1 == PRINT_ON)
+				save_big_five_member(gmembers[i]);
 		}
 			
 	}
@@ -164,7 +166,8 @@ static int Delete_cl(vector<member>& gmembers, string str, int option1, int opti
 		if (gmembers[i].cl == cond) {
 			flag[i] = 1;
 			sum++;
-			save_big_five_member(gmembers[i]);
+			if (option1 == PRINT_ON)
+				save_big_five_member(gmembers[i]);
 		}
 	}
 	erase_start(gmembers, flag);
@@ -195,7 +198,8 @@ static int Delete_phoneNum(vector<member>& gmembers, string str, int option1, in
 		if (!str.compare(database_name)) {
 			flag[i] = 1;
 			sum++;
-			save_big_five_member(gmembers[i]);
+			if (option1 == PRINT_ON)
+				save_big_five_member(gmembers[i]);
 		}
 
 	}
@@ -232,7 +236,8 @@ static int Delete_birthday(vector<member>& gmembers, string str, int option1, in
 		if (database_birthday == cond) {
 			flag[i] = 1;
 			sum++;
-			save_big_five_member(gmembers[i]);
+			if (option1 == PRINT_ON)
+				save_big_five_member(gmembers[i]);
 		}
 	}
 
@@ -257,7 +262,8 @@ static int Delete_certi(vector<member>& gmembers, string str, int option1, int o
 		if (gmembers[i].certi == level) {
 			flag[i] = 1;
 			sum++;
-			save_big_five_member(gmembers[i]);
+			if (option1 == PRINT_ON)
+				save_big_five_member(gmembers[i]);
 		}
 			
 	}
@@ -282,12 +288,25 @@ static void initialize_condition(void)
 	initialize_flag();
 }
 
+static string convert_ID(int num) {
+	stringstream ss;
+
+	// the number is converted to string with the help of stringstream
+	ss << num;
+	string ret;
+	ss >> ret;
+
+	// Append zero chars
+	int str_length = ret.length();
+	for (int i = 0; i < 8 - str_length; i++)
+		ret = "0" + ret;
+	return ret;
+}
+
 static string print_info(struct member m)
 {
 	ostringstream oss;
-	string first_string;
-	first_string = (m.employeeNum / 10000000) ? "DEL," : "DEL,0";
-	oss << first_string << m.employeeNum << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << "\n";
+	oss << "DEL," << convert_ID(m.employeeNum) << "," << m.name << "," << cl_position[m.cl - 1] << "," << m.phoneNum << "," << m.birthday << "," << certi_level[m.certi] << "\n";
 	return oss.str();
 }
 
@@ -306,7 +325,7 @@ static string print_output(int option1, int sum)
 	string return_string;
 	ostringstream oss;
 
-	if (big_five.empty()) {
+	if (sum == 0) {
 		return "DEL,NONE\n";
 	}
 		
