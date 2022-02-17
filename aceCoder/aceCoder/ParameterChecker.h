@@ -15,17 +15,6 @@ const int BIRTHDAYSIZE = 8;
 
 class ParameterChecker {
 public:
-	member convert(vector<string>& values) const {
-		member result{ 0 };
-		result.employeeNum = stoi(values[IDXEMPLOYEENUM]);
-		result.name = values[IDXNAME];
-		result.cl = getCL(values[IDXCL]);
-		result.phoneNum = values[IDXPHONENUM];
-		result.birthday = stoi(values[IDXBIRTHDAY]);
-		result.certi = getCELTI(values[IDXCERTI]);
-		return result;
-	}
-
 	vector<string> loadTxt(const string& filename) const {
 		vector<string> results;
 		std::ifstream input(filename);
@@ -88,7 +77,7 @@ public:
 		string tmp = str.substr(0, 2);
 		const int num = stoi(tmp);
 
-		if (num >= 0 && num <= 21) // 2000 2021
+		if (num >= 0 && num <= 21) // 2000~2021
 			orgnum += 2000000000;
 		else
 			orgnum += 1900000000;

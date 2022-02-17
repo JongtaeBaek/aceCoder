@@ -61,4 +61,5 @@ int main(int argc, char **argv)
 	outputfile.close();
 
 	delete para;
+	return EXIT_SUCCESS;
 }
