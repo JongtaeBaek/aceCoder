@@ -47,7 +47,9 @@
     <ClCompile Include="Add.cpp" />
     <ClCompile Include="AddParmeterChecker.cpp" />
     <ClCompile Include="delete.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="member.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="modify_test.cpp" />
@@ -69,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="input\inputAdd.txt" />
+    <Text Include="input\inputSearch.txt" />
     <Text Include="input\input_20_20.txt" />
     <Text Include="input\output_20_20.txt" />
   </ItemGroup>
