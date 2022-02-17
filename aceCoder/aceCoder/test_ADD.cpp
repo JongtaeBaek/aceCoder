@@ -43,7 +43,7 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE) {
 	for (const auto& line : lines) {
 		vector<string> values = para->parse(line);
 		ASSERT_TRUE(para->isValid(values));
-		const member mem = para->convert(values);
+		const member mem = para->convert_4sort(values);
 		EXPECT_TRUE(add->isValid(mem));
 		add->run(mem);
 	}
@@ -72,7 +72,6 @@ TEST(ADD_TESTSUITE, TEST_SORT) {
 		add->run(lines[i]);
 	}
 
-	// sort
 	sort(members.begin(), members.end(), [](const member& e1, const member& e2) { return (e1.employeeNum < e2.employeeNum); });
 
 	for (auto m : members)
@@ -96,7 +95,7 @@ TEST(ADD_TESTSUITE, TEST_INPUTFILE2) {
 		{
 			if (!para->isValid(values))
 				continue;
-			const member mem = para->convert(values);
+			const member mem = para->convert_4sort(values);
 			if (!add->isValid(mem))
 				continue;
 			add->run(mem);
