@@ -70,9 +70,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="input\input_sort.txt" />
     <Text Include="input\inputAdd.txt" />
     <Text Include="input\inputSearch.txt" />
     <Text Include="input\input_20_20.txt" />
+    <Text Include="input\output_sort.txt" />
     <Text Include="input\output_20_20.txt" />
   </ItemGroup>
   <ItemDefinitionGroup />
