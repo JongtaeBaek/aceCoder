@@ -37,6 +37,7 @@
     <ClInclude Include="AddParmeterChecker.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="delete.h" />
+    <ClInclude Include="FactoryCommand.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="ParameterChecker.h" />
@@ -48,9 +49,8 @@
     <ClCompile Include="Add.cpp" />
     <ClCompile Include="AddParmeterChecker.cpp" />
     <ClCompile Include="delete.cpp" />
-    <ClCompile Include="main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="FactoryCommand.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="member.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="modify_test.cpp" />

@@ -10,8 +10,7 @@ public:
 	virtual ~Add() = default;
 
 	bool isValid(const member& newmem) const;
-	int run(const member& newmem);
-	string run_old(const string& comand1line);
+	int run(const member& newmem);	
 	string run(const string& comand1line) override;	
 private:
 	vector<member> &members_;
