@@ -47,9 +47,17 @@ public:
 			fPos = inputstring.find_first_not_of(delimeter, lPos);
 			lPos = inputstring.find_first_of(delimeter, fPos);
 		}
-		
 		return results;
-	}	
+	}
+
+	string getCMD(const string& inputstring, const string& delimeter = ",") const {
+		auto fPos = inputstring.find_first_not_of(delimeter, 0);
+		auto lPos = inputstring.find_first_of(delimeter, fPos);
+		if (string::npos != fPos || string::npos != lPos) {
+			return inputstring.substr(fPos, lPos - fPos);
+		}
+		return string{};
+	}
 
 	virtual bool isValid(const vector<string>& values)  {		
 		return false;

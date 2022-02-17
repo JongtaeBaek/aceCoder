@@ -33,20 +33,20 @@ int main(int argc, char **argv)
 	string outputresult;
 
 	for (const auto& line : lines) {
-		vector<string> values = para->parse(line);
-		if (values[IDXCMD] == "ADD")
+		const string value = para->getCMD(line);
+		if (value == "ADD")
 		{
 			add->run(line);
 		}
-		else if (values[IDXCMD] == "DEL")
+		else if (value == "DEL")
 		{
 			outputresult += del->run(line);
 		}
-		else if (values[IDXCMD] == "MOD")
+		else if (value == "MOD")
 		{
 			outputresult += modifier->run(line);
 		}
-		else if (values[IDXCMD] == "SCH")
+		else if (value == "SCH")
 		{
 			outputresult += sch->run(line);
 		}
