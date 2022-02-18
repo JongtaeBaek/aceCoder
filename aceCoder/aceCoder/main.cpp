@@ -22,10 +22,16 @@ int main(int argc, char **argv)
 	if (para == nullptr)
 		return 	EXIT_FAILURE;
 
-	vector<string>lines = para->loadTxt(argv[1]);
-
-	if (lines.size() == 0)
+	if (!para->isValidFileName(argv[1]) || !para->isValidFileName(argv[2])){
+		cout << "[Error] File name" << endl;
 		return 	EXIT_FAILURE;
+	}
+
+	vector<string>lines = para->loadTxt(argv[1]);
+	if (lines.size() == 0){
+		cout << "[Error] File open" << endl;
+		return 	EXIT_FAILURE;
+	}
 
 	vector<string> commands = { "ADD","DEL","MOD" ,"SCH" };
 	std::map<std::string, Command*> cmdmap;

@@ -123,4 +123,18 @@ public:
 		result.certi = getCERTI(values[IDXCERTI]);
 		return result;
 	}
+
+	bool isValidFileName(const string& fileName) const {
+		if (fileName.length() < 1)
+			return false;
+		if (fileName.length() > 100)
+			return false;
+		if (fileName.find("/") < 0)
+			return false;
+		if (fileName.find("\\") < 0)
+			return false;
+		if (fileName[0] == '.')
+			return false;
+		return true;
+	}
 };

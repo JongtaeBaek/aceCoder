@@ -65,5 +65,6 @@
     <Text Include="input\TC1_output.txt">
       <Filter>input</Filter>
     </Text>
+    <Text Include="input.txt" />
   </ItemGroup>
 </Project>
